@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovDash - Q1 2026 Product Marketing Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --navy:     #0F1F3D;
+    --navy-mid: #1B3160;
+    --blue:     #2563EB;
+    --blue-lt:  #3B82F6;
+    --teal:     #0D9488;
+    --green:    #10B981;
+    --amber:    #F59E0B;
+    --slate:    #64748B;
+    --slate-lt: #94A3B8;
+    --light:    #E2E8F0;
+    --off-white:#F8FAFC;
+    --white:    #FFFFFF;
+    --dark:     #00001e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--off-white); color: var(--dark); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy); border-bottom: 2px solid var(--blue);
+    display: flex; align-items: center; padding: 0 2rem; height: 56px;
+    gap: 2rem;
+  }
+  .nav-logo { font-size: 1rem; font-weight: 800; color: var(--white); letter-spacing: 0.12em; margin-right: 1rem; }
+  nav a {
+    color: var(--slate-lt); text-decoration: none; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.04em; padding: 4px 0;
+    border-bottom: 2px solid transparent; transition: all .2s;
+    white-space: nowrap;
+  }
+  nav a:hover, nav a.active { color: var(--white); border-bottom-color: var(--blue); }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2.5rem 4rem; max-width: 1280px; margin: 0 auto; }
+  section:first-of-type { padding-top: 7rem; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1B3D7A 100%);
+    padding: 0; max-width: 100%; margin: 0;
+    display: flex; align-items: center; min-height: 440px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; right: -80px; top: -80px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(37,99,235,0.12);
+  }
+  .hero::after {
+    content: ''; position: absolute; right: 80px; bottom: -100px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: rgba(16,185,129,0.08);
+  }
+  .hero-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; width: 100%; position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; color: var(--blue-lt); margin-bottom: 1rem; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 1rem; }
+  .hero-sub { font-size: 1rem; color: var(--slate-lt); margin-bottom: 2rem; }
+  .hero-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .pill { padding: 0.35rem 1rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+  .pill-blue  { background: rgba(37,99,235,0.25); color: #93C5FD; border: 1px solid rgba(37,99,235,0.4); }
+  .pill-teal  { background: rgba(13,148,136,0.25); color: #5EEAD4; border: 1px solid rgba(13,148,136,0.4); }
+  .pill-green { background: rgba(16,185,129,0.25); color: #6EE7B7; border: 1px solid rgba(16,185,129,0.4); }
+  .pill-amber { background: rgba(245,158,11,0.25); color: #FCD34D; border: 1px solid rgba(245,158,11,0.4); }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
+  }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--blue); }
+  h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+  .section-sub { font-size: 0.9rem; color: var(--slate); margin-bottom: 2rem; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white); border: 1px solid var(--light);
+    border-radius: 12px; padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+  .card-accent { border-top: 3px solid var(--blue); }
+  .card-accent-teal  { border-top-color: var(--teal); }
+  .card-accent-green { border-top-color: var(--green); }
+  .card-accent-amber { border-top-color: var(--amber); }
+  .card-accent-slate { border-top-color: var(--slate); }
+
+  /* ── GRIDS ── */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  @media (max-width: 900px) {
+    .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+  }
+
+  /* ── KPI CARDS ── */
+  .kpi { text-align: center; padding: 1.4rem 1rem; }
+  .kpi-val { font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
+  .kpi-delta { font-size: 0.8rem; font-weight: 700; color: var(--green); margin-bottom: 0.25rem; }
+  .kpi-label { font-size: 0.78rem; color: var(--slate); font-weight: 500; }
+
+  /* ── CAMPAIGN CARDS ── */
+  .campaign-card { display: flex; flex-direction: column; gap: 1rem; }
+  .campaign-header { display: flex; justify-content: space-between; align-items: flex-start; }
+  .campaign-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+  .campaign-date { font-size: 0.75rem; color: var(--slate-lt); background: var(--off-white); padding: 2px 8px; border-radius: 999px; }
+  .campaign-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .mini-stat { text-align: center; background: var(--off-white); border-radius: 8px; padding: 0.6rem 0.3rem; }
+  .mini-stat-val { font-size: 1.1rem; font-weight: 800; }
+  .mini-stat-lbl { font-size: 0.68rem; color: var(--slate); margin-top: 2px; }
+  .campaign-assets { font-size: 0.8rem; color: var(--slate); }
+  .campaign-assets li { margin: 3px 0 3px 1rem; }
+
+  /* ── LIFECYCLE BAR ── */
+  .lifecycle { display: flex; gap: 0.5rem; margin-top: 1rem; }
+  .lifecycle-item {
+    flex: 1; background: var(--navy); border-radius: 8px; padding: 0.6rem 0.4rem;
+    text-align: center;
+  }
+  .lifecycle-item .val { font-size: 0.95rem; font-weight: 800; color: var(--white); }
+  .lifecycle-item .lbl { font-size: 0.65rem; color: var(--slate-lt); margin-top: 2px; }
+
+  /* ── CHART CONTAINERS ── */
+  .chart-wrap { position: relative; background: var(--white); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--light); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .chart-title { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+  .chart-sub { font-size: 0.75rem; color: var(--slate); margin-bottom: 1.25rem; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead th { background: var(--navy); color: var(--white); padding: 0.75rem 1rem; text-align: left; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; }
+  tbody tr:nth-child(even) { background: var(--off-white); }
+  tbody tr:hover { background: #EFF6FF; }
+  tbody td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--light); color: var(--dark); }
+  .td-blue  { color: var(--blue);  font-weight: 700; }
+  .td-teal  { color: var(--teal);  font-weight: 700; }
+  .td-green { color: var(--green); font-weight: 700; }
+  .td-slate { color: var(--slate); }
+  .td-amber { color: var(--amber); font-weight: 700; }
+
+  /* ── INSIGHT CALLOUT ── */
+  .insight {
+    background: var(--navy); color: var(--white);
+    border-radius: 10px; padding: 1rem 1.5rem;
+    font-size: 0.88rem; line-height: 1.6;
+    border-left: 4px solid var(--blue);
+    margin-top: 1rem;
+  }
+  .insight strong { color: var(--blue-lt); }
+
+  /* ── SOV BUBBLE CHART CUSTOM ── */
+  .sov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+
+  /* ── COMPETITOR TABLE ── */
+  .comp-row { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; border-radius: 8px; transition: background .15s; }
+  .comp-row:hover { background: var(--off-white); }
+  .comp-row.govdash-row { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; }
+  .comp-name { font-weight: 600; font-size: 0.9rem; flex: 1.5; }
+  .comp-sov  { flex: 1; font-size: 0.9rem; font-weight: 700; }
+  .comp-sent { flex: 1; font-size: 0.9rem; font-weight: 700; }
+  .comp-status { flex: 2; font-size: 0.78rem; color: var(--slate); }
+  .comp-bar-wrap { flex: 2; }
+  .comp-bar { height: 8px; border-radius: 4px; }
+
+  /* ── ROADMAP CARDS ── */
+  .roadmap-card { padding: 1.5rem; position: relative; overflow: hidden; }
+  .roadmap-tag { position: absolute; top: 1rem; right: 1rem; font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+  .roadmap-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 0.75rem; padding-right: 5rem; }
+  .roadmap-desc { font-size: 0.85rem; color: var(--slate); line-height: 1.6; }
+
+  /* ── TAKEAWAYS ── */
+  .takeaways-wrap { background: var(--navy); border-radius: 16px; padding: 2.5rem; }
+  .takeaways-wrap h2 { color: var(--white); margin-bottom: 2rem; }
+  .takeaway-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-top: 3px solid var(--blue); border-radius: 10px; padding: 1.25rem;
+  }
+  .takeaway-num { font-size: 0.7rem; font-weight: 800; color: var(--blue-lt); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .takeaway-title { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .takeaway-body { font-size: 0.82rem; color: var(--slate-lt); line-height: 1.6; }
+
+  /* ── DIVIDER ── */
+  .section-divider { border: none; border-top: 1px solid var(--light); margin: 0; }
+
+  /* ── TABS ── */
+  .tab-wrap { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 0.4rem 1.1rem; border-radius: 6px; font-size: 0.82rem; font-weight: 600;
+    border: 1.5px solid var(--light); background: var(--white); color: var(--slate);
+    cursor: pointer; transition: all .2s;
+  }
+  .tab-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .tab-btn.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SOURCE PILLS ── */
+  .source-pill { display:inline-flex; align-items:center; gap:.35rem; font-size:.7rem; font-weight:600; color:var(--slate); background:#fff; border:1px solid #E2E8F0; border-radius:999px; padding:3px 10px; white-space:nowrap; }
+
+  /* ── TOUR TAGS ── */
+  .tour-tag { display:inline-block; font-size:.7rem; font-weight:600; padding:2px 8px; border-radius:999px; margin:1px 2px; white-space:nowrap; }
+  .tag-tour     { background:#EFF6FF; color:var(--blue); }
+  .tag-capture  { background:#F0FDFA; color:var(--teal); }
+  .tag-proposal { background:#ECFDF5; color:var(--green); }
+  .tag-library  { background:#FFFBEB; color:var(--amber); }
+  .tag-contract { background:#F5F3FF; color:#7C3AED; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: var(--slate-lt);
+    text-align: center; padding: 1.5rem 2rem; font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  footer strong { color: var(--white); }
+
+  /* ── ANIMATE ON SCROLL ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .5s ease, transform .5s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">GOVDASH</span>
+  <a href="#campaigns">01 Campaigns</a>
+  <a href="#roadmap">02 Q2 Roadmap</a>
+  <a href="#organic">03 Organic</a>
+  <a href="#paid">04 Paid Ads</a>
+  <a href="#navattic">Navattic</a>
+  <a href="#forward">AI + Moving Forward</a>
+  <a href="#competitive">Competitive · SEMrush</a>
+  <a href="#takeaways">Takeaways</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Q1 2026 · January - March</div>
+    <h1>Product Marketing<br>Performance Report</h1>
+    <p class="hero-sub">Campaigns · Organic Traffic · Paid Advertising · Q2 Roadmap</p>
+    <div class="hero-pills">
+      <span class="pill pill-blue">162,851 Ad Impressions</span>
+      <span class="pill pill-green">6,802% FedRAMP ROI</span>
+      <span class="pill pill-teal">8% Share of Voice</span>
+      <span class="pill pill-amber">2.4K Ranked Keywords</span>
+    </div>
+  </div>
+</div>
+
+<!-- DATA SOURCES BAR -->
+<div style="background:#F8FAFC;border-bottom:1px solid #E2E8F0;padding:.7rem 2.5rem;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .75rem;">
+    <span style="font-size:.7rem;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-right:.25rem;white-space:nowrap;">Data Sources</span>
+    <span style="width:1px;height:14px;background:#CBD5E1;display:inline-block;margin-right:.25rem;"></span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      Google Search Console
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#FF6900"/><path d="M7 17V8h3l2 6 2-6h3v9h-2v-6l-2 6h-2l-2-6v6H7z" fill="white"/></svg>
+      Maintouch SEO Agency
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#FF6B00"/><text x="3" y="17" font-size="12" font-weight="700" fill="white" font-family="sans-serif">S</text></svg>
+      Semrush
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#FF7A59"/><path d="M12 5a4 4 0 014 4c0 1.8-1.2 3.4-2.8 3.8L17 19h-2.5l-3.5-6H9v6H7V5h5zm-3 2v4h3a2 2 0 000-4H9z" fill="white"/></svg>
+      HubSpot
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#FF4500"/><circle cx="12" cy="12" r="5" fill="white"/><circle cx="12" cy="12" r="3" fill="#FF4500"/></svg>
+      Reddit Ads
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#00A4EF"/><text x="3" y="17" font-size="11" font-weight="700" fill="white" font-family="sans-serif">M</text></svg>
+      Microsoft Ads
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#4285F4"/><path d="M12 11h6c.1.5.2 1 .2 1.5 0 3.7-2.5 6.5-6.2 6.5A6.5 6.5 0 015.5 12 6.5 6.5 0 0112 5.5c1.8 0 3.3.7 4.4 1.8L15 8.7A4 4 0 0012 7.5a4.5 4.5 0 000 9c2.3 0 3.8-1.3 4.1-3.1H12V11z" fill="white"/></svg>
+      Google Ads
+    </span>
+    <span class="source-pill">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><rect width="24" height="24" rx="5" fill="#7B5EA7"/><path d="M8 9h8M8 12h5M8 15h6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Navattic / HubSpot
+    </span>
+    <span style="margin-left:auto;font-size:.68rem;color:var(--slate);white-space:nowrap;">Q1 2026 · Jan 1 - Mar 27</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: CAMPAIGNS
+══════════════════════════════════════════ -->
+<section id="campaigns">
+  <div class="section-label">01 - Product Marketing</div>
+  <h2>Q1 2026 Campaign Overview</h2>
+  <p class="section-sub">Five campaigns launched across the quarter - two major product launches delivered exceptional ROI on minimal spend.</p>
+
+  <!-- Campaign cards -->
+  <div class="grid-3" style="margin-bottom:2rem;">
+
+    <!-- FedRAMP -->
+    <div class="card card-accent fade-up">
+      <div class="campaign-header">
+        <div class="campaign-title">FedRAMP / Security Launch</div>
+        <span class="campaign-date">Jan 5, 2026</span>
+      </div>
+      <div class="campaign-metrics">
+        <div class="mini-stat">
+          <div class="mini-stat-val" style="color:var(--green)">6,802%</div>
+          <div class="mini-stat-lbl">ROI</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-val" style="color:var(--blue)">$140K</div>
+          <div class="mini-stat-lbl">Deal Value</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-val" style="color:var(--teal)">3,579</div>
+          <div class="mini-stat-lbl">Influenced</div>
+        </div>
+      </div>
+      <div class="campaign-assets">
+        <ul>
+          <li>Videos with Ignyte security partner</li>
+          <li>Paid ads · SEO articles · Organic social</li>
+          <li>Web security hub · Sales assets</li>
+        </ul>
+      </div>
+      <div class="lifecycle">
+        <div class="lifecycle-item"><div class="val">$20</div><div class="lbl">Contact</div></div>
+        <div class="lifecycle-item"><div class="val">$1.01</div><div class="lbl">MQL</div></div>
+        <div class="lifecycle-item"><div class="val">$11.59</div><div class="lbl">SQL</div></div>
+        <div class="lifecycle-item"><div class="val">$11.21</div><div class="lbl">SAL</div></div>
+      </div>
+    </div>
+
+    <!-- Pricer -->
+    <div class="card card-accent card-accent-green fade-up">
+      <div class="campaign-header">
+        <div class="campaign-title">Pricer Product Launch</div>
+        <span class="campaign-date">Feb 2026</span>
+      </div>
+      <div class="campaign-metrics">
+        <div class="mini-stat">
+          <div class="mini-stat-val" style="color:var(--green)">5,724%</div>
+          <div class="mini-stat-lbl">ROI</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-val" style="color:var(--blue)">$314K</div>
+          <div class="mini-stat-lbl">Deal Value</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-val" style="color:var(--teal)">4,233</div>
+          <div class="mini-stat-lbl">Sessions</div>
+        </div>
+      </div>
+      <div class="campaign-assets">
+        <ul>
+          <li>Announcement video · Paid ads</li>
+          <li>Product article · Organic social</li>
+          <li>Navattic tour · One-pagers / sales assets</li>
+        </ul>
+      </div>
+      <div class="lifecycle">
+        <div class="lifecycle-item"><div class="val">$59</div><div class="lbl">Contact</div></div>
+        <div class="lifecycle-item"><div class="val">$49</div><div class="lbl">MQL</div></div>
+        <div class="lifecycle-item"><div class="val">$2,699</div><div class="lbl">SQL</div></div>
+        <div class="lifecycle-item"><div class="val">$265</div><div class="lbl">SAL</div></div>
+      </div>
+    </div>
+
+    <!-- Other campaigns -->
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div class="card card-accent card-accent-teal fade-up" style="flex:1">
+        <div class="campaign-header">
+          <div class="campaign-title">Series B Announcement</div>
+          <span class="campaign-date">Jan 2026</span>
+        </div>
+        <p style="font-size:.82rem;color:var(--slate);margin-top:.5rem;">$30M raise announced - drove 216 organic clicks to the funding blog, 13K impressions. PR hit, organic social amplification, investor outreach.</p>
+      </div>
+      <div class="card card-accent card-accent-amber fade-up" style="flex:1">
+        <div class="campaign-header">
+          <div class="campaign-title">Discover Public App</div>
+          <span class="campaign-date">Q1 2026</span>
+        </div>
+        <p style="font-size:.82rem;color:var(--slate);margin-top:.5rem;">Public launch of the Discover module - pipeline generation focus. Broad organic and social push supporting top-of-funnel awareness.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROI Comparison Chart -->
+  <div class="chart-wrap fade-up">
+    <div class="chart-title">Campaign ROI Comparison</div>
+    <div class="chart-sub">Both major Q1 launches delivered 5,000%+ returns on combined spend under $7,500</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+      <canvas id="roiChart" height="260"></canvas>
+      <div>
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-size:0.78rem;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;">FedRAMP Launch - Jan 5</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--green)">6,802%</div><div class="mini-stat-lbl">ROI</div></div>
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--blue)">$2,028</div><div class="mini-stat-lbl">Spend</div></div>
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--blue)">$140K</div><div class="mini-stat-lbl">Deal Value</div></div>
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--teal)">$4,154</div><div class="mini-stat-lbl">Attributed Rev.</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;">Pricer Launch - Feb</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--green)">5,724%</div><div class="mini-stat-lbl">ROI</div></div>
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--blue)">$5,392</div><div class="mini-stat-lbl">Spend</div></div>
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--blue)">$314K</div><div class="mini-stat-lbl">Deal Value</div></div>
+            <div class="mini-stat"><div class="mini-stat-val" style="color:var(--teal)">$9,881</div><div class="mini-stat-lbl">Attributed Rev.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: Q2 ROADMAP
+══════════════════════════════════════════ -->
+<section id="roadmap">
+  <div class="section-label">02 - Upcoming</div>
+  <h2>Q2 2026 Launch Roadmap</h2>
+  <p class="section-sub">Four major product marketing initiatives planned for April - June 2026.</p>
+
+  <div class="grid-2">
+    <div class="card roadmap-card card-accent fade-up">
+      <span class="roadmap-tag" style="background:#EFF6FF;color:var(--blue)">Platform</span>
+      <div class="roadmap-title">Subsidiary Management in GovDash</div>
+      <div class="roadmap-desc">Enables enterprise govcon companies to manage multiple subsidiary entities within one unified workspace. Key messaging: multi-entity visibility, unified reporting, enterprise control. Expected to open new enterprise deal motion.</div>
+    </div>
+    <div class="card roadmap-card card-accent card-accent-teal fade-up">
+      <span class="roadmap-tag" style="background:#F0FDFA;color:var(--teal)">AI / Intelligence</span>
+      <div class="roadmap-title">Discover Module Releases</div>
+      <div class="roadmap-desc">Three new AI-powered modules from the Discover suite: <strong>Forecasting</strong>, <strong>Market Analysis</strong>, and <strong>Competitive Analysis</strong>. Positions GovDash as the most complete intelligence platform in govcon - each module is a standalone campaign opportunity.</div>
+    </div>
+    <div class="card roadmap-card card-accent card-accent-green fade-up">
+      <span class="roadmap-tag" style="background:#ECFDF5;color:var(--green)">AI / Platform</span>
+      <div class="roadmap-title">Agent Mode in Dash</div>
+      <div class="roadmap-desc">Autonomous AI agent capabilities embedded in the GovDash workspace. Users delegate research, drafting, and analysis tasks to an AI agent without leaving their workflow. Flagship AI moment - highest expected media coverage of any Q2 launch.</div>
+    </div>
+    <div class="card roadmap-card card-accent card-accent-amber fade-up">
+      <span class="roadmap-tag" style="background:#FFFBEB;color:var(--amber)">Core Product</span>
+      <div class="roadmap-title">Proposal Cloud Overhaul</div>
+      <div class="roadmap-desc">Major redesign and capability expansion of GovDash's most-used feature. Expected to generate significant pipeline impact given the broad customer base that relies on Proposal Cloud daily. Will require full asset refresh: video, web, sales enablement.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: ORGANIC
+══════════════════════════════════════════ -->
+<section id="organic">
+  <div class="section-label">03 - SEO &amp; AEO</div>
+  <h2>Organic Traffic Performance</h2>
+  <p class="section-sub">Google Search Console · Jan 1 - Mar 31, 2026 · vs. prior period</p>
+
+  <!-- KPI Grid -->
+  <div class="grid-4" style="margin-bottom:2rem;">
+    <div class="card kpi card-accent fade-up">
+      <div class="kpi-val" style="color:var(--blue)">8.73K</div>
+      <div class="kpi-delta">+4.5K vs prior period</div>
+      <div class="kpi-label">Total Clicks</div>
+    </div>
+    <div class="card kpi card-accent card-accent-teal fade-up">
+      <div class="kpi-val" style="color:var(--teal)">1.31M</div>
+      <div class="kpi-delta">+0.86M vs prior period</div>
+      <div class="kpi-label">Impressions</div>
+    </div>
+    <div class="card kpi card-accent card-accent-green fade-up">
+      <div class="kpi-val" style="color:var(--green)">2.4K</div>
+      <div class="kpi-delta">+1.4K vs prior period</div>
+      <div class="kpi-label">Ranked Keywords</div>
+    </div>
+    <div class="card kpi card-accent card-accent-amber fade-up">
+      <div class="kpi-val" style="color:var(--amber)">37</div>
+      <div class="kpi-delta">+37 new articles</div>
+      <div class="kpi-label">Content Published</div>
+    </div>
+  </div>
+  <div class="grid-4" style="margin-bottom:2rem;">
+    <div class="card kpi fade-up">
+      <div class="kpi-val" style="color:var(--blue)">3.4K</div>
+      <div class="kpi-delta">+0.9K</div>
+      <div class="kpi-label">Branded Clicks</div>
+    </div>
+    <div class="card kpi fade-up">
+      <div class="kpi-val" style="color:var(--teal)">5.3K</div>
+      <div class="kpi-delta">+2.7K</div>
+      <div class="kpi-label">Non-Branded Clicks</div>
+    </div>
+    <div class="card kpi fade-up">
+      <div class="kpi-val" style="color:var(--slate)">525</div>
+      <div class="kpi-delta">+62</div>
+      <div class="kpi-label">AI-Referred Sessions</div>
+    </div>
+    <div class="card kpi fade-up">
+      <div class="kpi-val" style="color:var(--slate)">380.7K</div>
+      <div class="kpi-delta">+365K</div>
+      <div class="kpi-label">Direct Traffic</div>
+    </div>
+  </div>
+
+  <!-- QoQ Comparison -->
+  <div style="margin-bottom:2rem;">
+    <div style="font-size:0.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;"><span style="width:20px;height:2px;background:var(--teal);display:inline-block"></span>Quarter-over-Quarter</div>
+    <h3 style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:.3rem;">Q4 2025 vs Q1 2026 - Organic Search</h3>
+    <p style="font-size:.85rem;color:var(--slate);margin-bottom:1.25rem;">Google Search Console · Oct-Dec 2025 vs Jan-Mar 2026</p>
+
+    <div class="grid-4" style="margin-bottom:1.5rem;">
+      <div class="card kpi card-accent fade-up">
+        <div style="font-size:.7rem;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">Total Clicks</div>
+        <div style="display:flex;justify-content:center;gap:1.5rem;align-items:flex-end;margin-bottom:.4rem;">
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--slate)">4,182</div><div style="font-size:.68rem;color:var(--slate-lt)">Q4 2025</div></div>
+          <div style="font-size:1.1rem;color:var(--slate-lt);padding-bottom:.2rem;">→</div>
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--blue)">8,730</div><div style="font-size:.68rem;color:var(--slate-lt)">Q1 2026</div></div>
+        </div>
+        <div class="kpi-delta" style="font-size:.95rem;">+108.8%</div>
+      </div>
+      <div class="card kpi card-accent card-accent-teal fade-up">
+        <div style="font-size:.7rem;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">Impressions</div>
+        <div style="display:flex;justify-content:center;gap:1.5rem;align-items:flex-end;margin-bottom:.4rem;">
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--slate)">449K</div><div style="font-size:.68rem;color:var(--slate-lt)">Q4 2025</div></div>
+          <div style="font-size:1.1rem;color:var(--slate-lt);padding-bottom:.2rem;">→</div>
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--teal)">1.31M</div><div style="font-size:.68rem;color:var(--slate-lt)">Q1 2026</div></div>
+        </div>
+        <div class="kpi-delta" style="font-size:.95rem;">+191.8%</div>
+      </div>
+      <div class="card kpi card-accent card-accent-green fade-up">
+        <div style="font-size:.7rem;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">Peak Monthly Clicks</div>
+        <div style="display:flex;justify-content:center;gap:1.5rem;align-items:flex-end;margin-bottom:.4rem;">
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--slate)">1,459</div><div style="font-size:.68rem;color:var(--slate-lt)">Dec '25</div></div>
+          <div style="font-size:1.1rem;color:var(--slate-lt);padding-bottom:.2rem;">→</div>
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--green)">3,139</div><div style="font-size:.68rem;color:var(--slate-lt)">Jan '26</div></div>
+        </div>
+        <div class="kpi-delta" style="font-size:.95rem;">+115.1%</div>
+      </div>
+      <div class="card kpi card-accent card-accent-amber fade-up">
+        <div style="font-size:.7rem;font-weight:700;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">Peak Monthly Impr.</div>
+        <div style="display:flex;justify-content:center;gap:1.5rem;align-items:flex-end;margin-bottom:.4rem;">
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--slate)">186K</div><div style="font-size:.68rem;color:var(--slate-lt)">Dec '25</div></div>
+          <div style="font-size:1.1rem;color:var(--slate-lt);padding-bottom:.2rem;">→</div>
+          <div style="text-align:center;"><div style="font-size:1.4rem;font-weight:800;color:var(--amber)">503K</div><div style="font-size:.68rem;color:var(--slate-lt)">Feb '26</div></div>
+        </div>
+        <div class="kpi-delta" style="font-size:.95rem;">+170.4%</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:1rem;">
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">Monthly Clicks - Q4 2025 vs Q1 2026</div>
+        <div class="chart-sub">Google Search Console · organic clicks by month</div>
+        <canvas id="qoqClicksChart" height="240"></canvas>
+      </div>
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">Monthly Impressions - Q4 2025 vs Q1 2026</div>
+        <div class="chart-sub">Google Search Console · organic impressions by month</div>
+        <canvas id="qoqImprChart" height="240"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-wrap fade-up" style="margin-bottom:.5rem;">
+      <div class="chart-title">6-Month Organic Click Trend</div>
+      <div class="chart-sub">Oct 2025 - Mar 2026 · monthly organic search clicks · shaded region = Q1 2026</div>
+      <canvas id="sixMonthChart" height="160"></canvas>
+    </div>
+
+    <!-- SEMrush Organic Growth Chart -->
+    <div class="chart-wrap fade-up" style="margin-top:1rem;margin-bottom:.5rem;">
+      <div class="chart-title">SEMrush Organic Traffic &amp; Keyword Growth</div>
+      <div class="chart-sub">govdash.com · Oct 2025 - Mar 2026 · estimated organic traffic &amp; ranked keywords (US, SEMrush)</div>
+      <canvas id="semrushOrgChart" height="160"></canvas>
+    </div>
+
+    <div class="insight">
+      <strong>+108.8% click growth QoQ</strong> - Impressions nearly tripled (+191.8%) driven by the FedRAMP launch (Jan 5), Series B press coverage (Jan 15 spike: 321 clicks in a single day), and compounding glossary/blog SEO. Every Q1 month outperformed Q4's best month.
+    </div>
+  </div>
+
+  <!-- Clicks over time chart -->
+  <div class="grid-2" style="margin-bottom:2rem;">
+    <div class="chart-wrap fade-up">
+      <div class="chart-title">Weekly Clicks - Organic Search</div>
+      <div class="chart-sub">Google Search Console · Q1 2026 vs Q4 2025 · 13-week comparison</div>
+      <canvas id="clicksChart" height="220"></canvas>
+    </div>
+    <div class="chart-wrap fade-up">
+      <div class="chart-title">Branded vs Non-Branded Split</div>
+      <div class="chart-sub">Q1 2026 · Total clicks by type</div>
+      <canvas id="brandedChart" height="220"></canvas>
+    </div>
+  </div>
+
+  <!-- Tabs: Top Pages / Top Keywords -->
+  <div class="card fade-up" style="padding:1.5rem;">
+    <div class="tab-wrap">
+      <button class="tab-btn active" onclick="switchTab('pages')">Top Pages</button>
+      <button class="tab-btn" onclick="switchTab('branded-kw')">Branded Keywords</button>
+      <button class="tab-btn" onclick="switchTab('nonbranded-kw')">Non-Branded Keywords</button>
+    </div>
+
+    <div id="tab-pages" class="tab-panel active">
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Clicks</th><th>Impressions</th><th>CTR</th><th>Avg. Position</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>govdash.com/</td><td class="td-blue">3,542</td><td>145.7K</td><td class="td-teal">2.43%</td><td class="td-slate">22.5</td></tr>
+          <tr><td>/blog/govdash-raises-30m-in-new-funding</td><td class="td-blue">216</td><td>13.1K</td><td class="td-teal">1.65%</td><td class="td-slate">3.5</td></tr>
+          <tr><td>/glossary/option-year</td><td class="td-blue">213</td><td>16.7K</td><td class="td-teal">1.27%</td><td class="td-slate">4.2</td></tr>
+          <tr><td>/blog/how-to-use-sam-gov-to-find-and-win-government-contracts</td><td class="td-blue">164</td><td>64.5K</td><td class="td-teal">0.25%</td><td class="td-slate">7.8</td></tr>
+          <tr><td>/blog/press-govdash-raises-30m-series-b</td><td class="td-blue">144</td><td>13.7K</td><td class="td-teal">1.05%</td><td class="td-slate">8.1</td></tr>
+          <tr><td>/blog/top-5-ai-solutions-for-govcon-govdash-takes-the-lead</td><td class="td-blue">135</td><td>43.6K</td><td class="td-teal">0.31%</td><td class="td-slate">7.3</td></tr>
+          <tr><td>/blog/govdash-raises-10m-series-a-funding-round</td><td class="td-blue">124</td><td>11.7K</td><td class="td-teal">1.06%</td><td class="td-slate">2.4</td></tr>
+          <tr><td>/about</td><td class="td-blue">111</td><td>22.3K</td><td class="td-teal">0.50%</td><td class="td-slate">4.3</td></tr>
+          <tr><td>/pricing</td><td class="td-blue">109</td><td>12.2K</td><td class="td-teal">0.89%</td><td class="td-slate">2.4</td></tr>
+          <tr><td>/glossary/fedramp-meaning</td><td class="td-blue">43</td><td>12.4K</td><td class="td-amber">0.35%</td><td class="td-slate">38.6 ⚠️</td></tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Opportunity:</strong> /glossary/fedramp-meaning has 12.4K impressions but sits at position 38.6 - a major ranking improvement target, especially post-FedRAMP launch. /how-to-use-sam-gov has 64.5K impressions at 0.25% CTR - better title/meta could unlock significant clicks.
+      </div>
+    </div>
+
+    <div id="tab-branded-kw" class="tab-panel">
+      <table>
+        <thead><tr><th>Keyword</th><th>Clicks</th><th>Impressions</th><th>CTR</th><th>Position</th></tr></thead>
+        <tbody>
+          <tr><td>govdash</td><td class="td-blue">2,746</td><td>7,038</td><td class="td-green">39.02%</td><td class="td-slate">1.3</td></tr>
+          <tr><td>gov dash</td><td class="td-blue">199</td><td>831</td><td class="td-green">23.95%</td><td class="td-slate">1.5</td></tr>
+          <tr><td>govdash series b</td><td class="td-blue">80</td><td>237</td><td class="td-green">33.76%</td><td class="td-slate">2.2</td></tr>
+          <tr><td>govdash funding</td><td class="td-blue">47</td><td>165</td><td class="td-green">28.48%</td><td class="td-slate">1.2</td></tr>
+          <tr><td>govdash ai</td><td class="td-blue">37</td><td>113</td><td class="td-green">32.74%</td><td class="td-slate">1.3</td></tr>
+          <tr><td>govdash pricing</td><td class="td-blue">33</td><td>359</td><td class="td-amber">9.19%</td><td class="td-slate">11.5</td></tr>
+          <tr><td>govdash fedramp</td><td class="td-blue">27</td><td>74</td><td class="td-green">36.49%</td><td class="td-slate">1.8</td></tr>
+          <tr><td>govdash series a</td><td class="td-blue">17</td><td>39</td><td class="td-green">43.59%</td><td class="td-slate">1.0</td></tr>
+          <tr><td>govdash reviews</td><td class="td-blue">5</td><td>89</td><td class="td-amber">5.62%</td><td class="td-slate">3.9</td></tr>
+          <tr><td>govdash competitors</td><td class="td-blue">6</td><td>59</td><td class="td-amber">10.17%</td><td class="td-slate">2.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="tab-nonbranded-kw" class="tab-panel">
+      <table>
+        <thead><tr><th>Keyword</th><th>Clicks</th><th>Impressions</th><th>CTR</th><th>Position</th></tr></thead>
+        <tbody>
+          <tr><td>capture management</td><td class="td-teal">12</td><td>757</td><td class="td-slate">1.59%</td><td class="td-slate">4.2</td></tr>
+          <tr><td>ai for government contracting</td><td class="td-teal">11</td><td>503</td><td class="td-slate">2.19%</td><td class="td-slate">4.4</td></tr>
+          <tr><td>ai government contracts</td><td class="td-teal">8</td><td>766</td><td class="td-slate">1.04%</td><td class="td-slate">7.5</td></tr>
+          <tr><td>cost plus fixed fee contract</td><td class="td-teal">8</td><td>714</td><td class="td-slate">1.12%</td><td class="td-slate">3.7</td></tr>
+          <tr><td>what is capture management</td><td class="td-teal">6</td><td>308</td><td class="td-slate">1.95%</td><td class="td-slate">1.7</td></tr>
+          <tr><td>compliance matrix</td><td class="td-teal">5</td><td>1,453</td><td class="td-amber">0.34%</td><td class="td-slate">10.6 ⚠️</td></tr>
+          <tr><td>sam.gov contracts</td><td class="td-teal">5</td><td>796</td><td class="td-amber">0.63%</td><td class="td-slate">8.3</td></tr>
+          <tr><td>gsa ebuy</td><td class="td-teal">4</td><td>5,927</td><td class="td-amber">0.07%</td><td class="td-slate">7.2 ⚠️</td></tr>
+          <tr><td>best ai for government contracting</td><td class="td-teal">4</td><td>52</td><td class="td-green">7.69%</td><td class="td-slate">1.5</td></tr>
+          <tr><td>govcon ai</td><td class="td-teal">4</td><td>535</td><td class="td-amber">0.75%</td><td class="td-slate">6.8</td></tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>⚠️ High impression / low CTR opportunities:</strong> "gsa ebuy" (5,927 impr, 0.07% CTR) and "compliance matrix" (1,453 impr, 0.34% CTR) are ranking but not converting - title and meta optimization could significantly increase clicks at no extra cost.
+      </div>
+    </div>
+  </div>
+
+  <!-- Share of Voice -->
+  <div style="margin-top:2rem;">
+    <div class="section-label" style="margin-top:1rem;">Competitive Intelligence</div>
+    <h3 style="font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:.3rem;">Share of Voice vs. Sentiment</h3>
+    <p style="font-size:.85rem;color:var(--slate);margin-bottom:1.5rem;">GovDash holds the highest share of voice at 8% with standout 96% sentiment - "Leading and Loved"</p>
+
+    <div class="sov-grid">
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">Share of Voice - Competitive Comparison</div>
+        <div class="chart-sub">% of category conversations mentioning each brand</div>
+        <canvas id="sovChart" height="240"></canvas>
+      </div>
+      <div class="card fade-up" style="padding:1.5rem;">
+        <div style="font-size:.85rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;">Competitor Overview</div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div class="comp-row govdash-row">
+            <div class="comp-name" style="color:var(--blue)">🏆 GovDash</div>
+            <div class="comp-sov" style="color:var(--blue)">8%</div>
+            <div class="comp-sent" style="color:var(--green)">96%</div>
+            <div class="comp-bar-wrap"><div class="comp-bar" style="width:100%;background:var(--blue)"></div></div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Deltek</div>
+            <div class="comp-sov" style="color:var(--slate)">~4%</div>
+            <div class="comp-sent" style="color:var(--amber)">~70%</div>
+            <div class="comp-bar-wrap"><div class="comp-bar" style="width:50%;background:var(--slate-lt)"></div></div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Procurement Sciences</div>
+            <div class="comp-sov" style="color:var(--slate)">~3%</div>
+            <div class="comp-sent" style="color:var(--amber)">~73%</div>
+            <div class="comp-bar-wrap"><div class="comp-bar" style="width:37%;background:var(--slate-lt)"></div></div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Unanet</div>
+            <div class="comp-sov" style="color:var(--slate)">~2.5%</div>
+            <div class="comp-sent" style="color:var(--amber)">~75%</div>
+            <div class="comp-bar-wrap"><div class="comp-bar" style="width:31%;background:var(--slate-lt)"></div></div>
+          </div>
+          <div class="comp-row">
+            <div class="comp-name">Govsignals</div>
+            <div class="comp-sov" style="color:var(--slate)">~0%</div>
+            <div class="comp-sent" style="color:var(--slate)">~50%</div>
+            <div class="comp-bar-wrap"><div class="comp-bar" style="width:2%;background:var(--light)"></div></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;margin-top:.75rem;font-size:.7rem;color:var(--slate-lt);">
+          <span>SoV %</span><span>·</span><span>Sentiment %</span><span>·</span><span style="display:flex;align-items:center;gap:3px;"><span style="width:12px;height:4px;background:var(--blue);display:inline-block;border-radius:2px"></span> SoV bar</span>
+        </div>
+        <div class="insight" style="margin-top:1rem;">
+          <strong>Strategy:</strong> Protect the lead with customer stories, G2/Capterra reviews, and case studies. Sentiment gap (96% vs ~70%) is the real moat.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: PAID ADS
+══════════════════════════════════════════ -->
+<section id="paid">
+  <div class="section-label">04 - Paid Advertising</div>
+  <h2>Paid Ads Performance</h2>
+  <p class="section-sub">Google Ads · LinkedIn · Reddit · Bing - Q1 2026</p>
+
+  <!-- Google Ads hero -->
+  <div class="grid-3" style="margin-bottom:2rem;">
+    <div class="card fade-up" style="background:var(--blue);border:none;text-align:center;padding:2rem 1rem;">
+      <div style="font-size:2.5rem;font-weight:800;color:var(--white);">162,851</div>
+      <div style="font-size:0.85rem;color:#BFDBFE;margin-top:.25rem;">Google Ads Impressions</div>
+    </div>
+    <div class="card fade-up" style="background:var(--teal);border:none;text-align:center;padding:2rem 1rem;">
+      <div style="font-size:2.5rem;font-weight:800;color:var(--white);">17,075</div>
+      <div style="font-size:0.85rem;color:#CCFBF1;margin-top:.25rem;">Total Clicks</div>
+    </div>
+    <div class="card fade-up" style="background:var(--green);border:none;text-align:center;padding:2rem 1rem;">
+      <div style="font-size:2.5rem;font-weight:800;color:var(--white);">14.39%</div>
+      <div style="font-size:0.85rem;color:#BBF7D0;margin-top:.25rem;">Click Conversion Rate</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="grid-2" style="margin-bottom:2rem;">
+    <div class="chart-wrap fade-up">
+      <div class="chart-title">Top Keywords by CTR - Google Ads</div>
+      <div class="chart-sub">Jan 1 - Mar 31, 2026 · Click-through rate %</div>
+      <canvas id="adsKwChart" height="320"></canvas>
+    </div>
+    <div class="chart-wrap fade-up">
+      <div class="chart-title">Website Visitors by Channel</div>
+      <div class="chart-sub">HubSpot Analytics · Dec 26, 2025 - Mar 25, 2026 · Total visitors</div>
+      <canvas id="channelChart" height="320"></canvas>
+    </div>
+  </div>
+
+  <!-- Monthly traffic chart -->
+  <div class="chart-wrap fade-up" style="margin-bottom:2rem;">
+    <div class="chart-title">Monthly Traffic by Source - Growth Trend</div>
+    <div class="chart-sub">HubSpot Analytics · Dec 2025 - Mar 2026</div>
+    <canvas id="trafficChart" height="200"></canvas>
+  </div>
+
+  <!-- Channel breakdown cards -->
+  <div class="grid-2">
+    <div class="card card-accent fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;">
+        <div style="font-size:1.05rem;font-weight:700;">Google Search Ads</div>
+        <span style="font-size:.7rem;background:#EFF6FF;color:var(--blue);padding:2px 10px;border-radius:999px;font-weight:700;">#1 Channel</span>
+      </div>
+      <div style="font-size:2rem;font-weight:800;color:var(--blue);margin-bottom:.25rem;">21,947</div>
+      <div style="font-size:.78rem;color:var(--slate);margin-bottom:.75rem;">tracked visitors</div>
+      <p style="font-size:.84rem;color:var(--slate);line-height:1.6;">Top channel by volume. 14.39% conversion rate across 162K impressions. Brand terms dominate - "govdash" keywords drive 38-50% CTR. Competitor conquesting (nextstage, samsearch ai) also performing well at 50%+ CTR.</p>
+    </div>
+    <div class="card card-accent card-accent-teal fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;">
+        <div style="font-size:1.05rem;font-weight:700;">LinkedIn (Paid Social)</div>
+        <span style="font-size:.7rem;background:#F0FDFA;color:var(--teal);padding:2px 10px;border-radius:999px;font-weight:700;">Fastest Growing</span>
+      </div>
+      <div style="font-size:2rem;font-weight:800;color:var(--teal);margin-bottom:.25rem;">6,133</div>
+      <div style="font-size:.78rem;color:var(--slate);margin-bottom:.75rem;">tracked visitors</div>
+      <p style="font-size:.84rem;color:var(--slate);line-height:1.6;">Paid social grew 17x in Q1 - from 148 visitors in Dec to 2,527 in Mar. Key channel for enterprise govcon decision-makers. Strong signal to increase Q2 investment, particularly for Subsidiary Management and Agent Mode launches.</p>
+    </div>
+    <div class="card card-accent card-accent-amber fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;">
+        <div style="font-size:1.05rem;font-weight:700;">Reddit Ads</div>
+        <span style="font-size:.7rem;background:#FFFBEB;color:var(--amber);padding:2px 10px;border-radius:999px;font-weight:700;">GovCon SubReddits</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem;">
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--amber);">$9,769</div><div class="mini-stat-lbl">Total Spend</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--blue);">794.7K</div><div class="mini-stat-lbl">Impressions</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--teal);">4,200</div><div class="mini-stat-lbl">Clicks</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--slate);">0.529%</div><div class="mini-stat-lbl">CTR</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--slate);">$2.33</div><div class="mini-stat-lbl">CPC</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--slate);">$12.29</div><div class="mini-stat-lbl">eCPM</div></div>
+      </div>
+      <p style="font-size:.84rem;color:var(--slate);line-height:1.6;">r/washingtondc dominates at 87% of audience - the govcon buyer base on Reddit is DC-metro concentrated. Spend ramped ~$150-180/day through Jan-mid-Feb, then stepped down in March. See full breakdown below.</p>
+    </div>
+    <div class="card card-accent card-accent-slate fade-up">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;">
+        <div style="font-size:1.05rem;font-weight:700;">Bing Ads</div>
+        <span style="font-size:.7rem;background:var(--off-white);color:var(--slate);padding:2px 10px;border-radius:999px;font-weight:700;">3 Campaigns</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem;">
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--slate);">$11,038</div><div class="mini-stat-lbl">Total Spend</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--blue);">725.9K</div><div class="mini-stat-lbl">Impressions</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--teal);">14,334</div><div class="mini-stat-lbl">Clicks</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--green);">1,046</div><div class="mini-stat-lbl">Conversions</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--slate);">$0.74</div><div class="mini-stat-lbl">Avg. CPC</div></div>
+        <div class="mini-stat"><div class="mini-stat-val" style="color:var(--slate);">2.36%</div><div class="mini-stat-lbl">CTR</div></div>
+      </div>
+      <p style="font-size:.84rem;color:var(--slate);line-height:1.6;">3 campaigns (Competitors, Alpha, Beta) - all currently paused. "software for govcon" top keyword at 4.43% CTR and $0.47 CPC. See full breakdown below.</p>
+    </div>
+  </div>
+
+  <!-- Bing Deep Dive -->
+  <div style="margin-top:2rem;">
+    <div style="font-size:0.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;"><span style="width:20px;height:2px;background:var(--slate);display:inline-block"></span>Bing Ads - Deep Dive</div>
+    <h3 style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:.3rem;">Keyword &amp; Campaign Breakdown</h3>
+    <p style="font-size:.85rem;color:var(--slate);margin-bottom:1.5rem;">Jan 1 - Mar 20, 2026 · 3 campaigns · All currently paused</p>
+
+    <!-- Hero stats -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+      <div class="card fade-up" style="background:var(--navy);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">$11,038</div>
+        <div style="font-size:.8rem;color:var(--slate-lt);margin-top:.2rem;">Total Spend</div>
+      </div>
+      <div class="card fade-up" style="background:var(--blue);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">14,334</div>
+        <div style="font-size:.8rem;color:#BFDBFE;margin-top:.2rem;">Clicks · $0.74 CPC</div>
+      </div>
+      <div class="card fade-up" style="background:var(--green);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">1,046</div>
+        <div style="font-size:.8rem;color:#BBF7D0;margin-top:.2rem;">Conversions</div>
+      </div>
+      <div class="card fade-up" style="background:var(--teal);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">725,961</div>
+        <div style="font-size:.8rem;color:#CCFBF1;margin-top:.2rem;">Impressions · 2.36% CTR</div>
+      </div>
+    </div>
+
+    <!-- Campaign + keyword charts -->
+    <div class="grid-2" style="margin-bottom:1.5rem;">
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">Clicks by Campaign</div>
+        <div class="chart-sub">Keyword-level data · Jan 1 - Mar 20, 2026</div>
+        <canvas id="bingCampaignChart" height="240"></canvas>
+      </div>
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">Search vs. Audience Network</div>
+        <div class="chart-sub">Search: 4.6% CTR · Audience: 0.84% CTR</div>
+        <canvas id="bingNetworkChart" height="240"></canvas>
+      </div>
+    </div>
+
+    <!-- Top keywords chart -->
+    <div class="chart-wrap fade-up" style="margin-bottom:1.5rem;">
+      <div class="chart-title">Top Keywords by Clicks - All Campaigns</div>
+      <div class="chart-sub">Enabled keywords with clicks > 0 · colored by campaign type</div>
+      <canvas id="bingKwChart" height="260"></canvas>
+    </div>
+
+    <!-- Keyword table -->
+    <div class="card fade-up" style="padding:1.5rem;">
+      <div style="font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:1rem;">Top Keywords - Full Table</div>
+      <table>
+        <thead>
+          <tr><th>Keyword</th><th>Campaign</th><th>Clicks</th><th>Impressions</th><th>CTR</th><th>CPC</th><th>Spend</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>software for govcon</strong></td><td style="color:var(--blue);font-size:.8rem;">Alpha</td><td class="td-blue">117</td><td>2,643</td><td class="td-green">4.43%</td><td class="td-teal">$0.47</td><td>$55.15</td></tr>
+          <tr><td>govcon</td><td style="color:var(--blue);font-size:.8rem;">Alpha</td><td class="td-blue">97</td><td>7,494</td><td class="td-slate">1.29%</td><td class="td-teal">$0.90</td><td>$87.60</td></tr>
+          <tr><td>ai for government contractors</td><td style="color:var(--blue);font-size:.8rem;">Alpha</td><td class="td-blue">82</td><td>4,164</td><td class="td-slate">1.97%</td><td class="td-teal">$0.69</td><td>$56.24</td></tr>
+          <tr><td>govwin</td><td style="color:var(--amber);font-size:.8rem;">Competitors</td><td class="td-blue">63</td><td>5,550</td><td class="td-slate">1.14%</td><td class="td-amber">$3.39</td><td>$213.34</td></tr>
+          <tr><td>ai for govcon</td><td style="color:var(--teal);font-size:.8rem;">Beta</td><td class="td-blue">60</td><td>3,850</td><td class="td-slate">1.56%</td><td class="td-teal">$0.92</td><td>$55.22</td></tr>
+          <tr><td>govcon</td><td style="color:var(--teal);font-size:.8rem;">Beta</td><td class="td-blue">47</td><td>5,183</td><td class="td-slate">0.91%</td><td class="td-slate">$1.76</td><td>$82.76</td></tr>
+          <tr><td>sam gov</td><td style="color:var(--teal);font-size:.8rem;">Beta</td><td class="td-blue">20</td><td>5,486</td><td class="td-slate">0.36%</td><td class="td-slate">$1.34</td><td>$26.83</td></tr>
+          <tr><td>ai for govcon</td><td style="color:var(--blue);font-size:.8rem;">Alpha</td><td class="td-blue">19</td><td>640</td><td class="td-teal">2.97%</td><td class="td-teal">$0.50</td><td>$9.48</td></tr>
+          <tr><td>deltek</td><td style="color:var(--amber);font-size:.8rem;">Competitors</td><td class="td-blue">11</td><td>4,428</td><td class="td-slate">0.25%</td><td class="td-slate">$1.92</td><td>$21.08</td></tr>
+          <tr><td>Federal Procurement data system</td><td style="color:var(--teal);font-size:.8rem;">Beta</td><td class="td-blue">11</td><td>2,114</td><td class="td-slate">0.52%</td><td class="td-slate">$1.92</td><td>$21.09</td></tr>
+          <tr><td>GSA Ebuy</td><td style="color:var(--amber);font-size:.8rem;">Competitors</td><td class="td-blue">9</td><td>2,560</td><td class="td-slate">0.35%</td><td class="td-amber">$4.94</td><td>$44.42</td></tr>
+          <tr><td>costpoint</td><td style="color:var(--amber);font-size:.8rem;">Competitors</td><td class="td-blue">10</td><td>6,328</td><td class="td-slate">0.16%</td><td class="td-slate">$1.31</td><td>$13.09</td></tr>
+        </tbody>
+      </table>
+      <div class="insight" style="margin-top:1rem;">
+        <strong>Top performer:</strong> "software for govcon" - 4.43% CTR at $0.47 CPC is exceptional efficiency. <strong>Competitor conquesting:</strong> "govwin" drives real clicks (63) but at $3.39 CPC - 4-7x pricier than category terms. "deltek" and "costpoint" have high impression volume but low CTR (&lt;0.25%), suggesting ad copy optimization opportunity. <strong>Note:</strong> All 3 campaigns are currently paused - reactivating Alpha with "software for govcon" and "ai for govcon" keywords should be a Q2 priority.
+      </div>
+    </div>
+  </div>
+
+  <!-- Reddit Deep Dive -->
+  <div style="margin-top:2rem;">
+    <div style="font-size:0.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;"><span style="width:20px;height:2px;background:var(--amber);display:inline-block"></span>Reddit Ads - Deep Dive</div>
+    <h3 style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:.3rem;">Subreddit Audience &amp; Spend Breakdown</h3>
+    <p style="font-size:.85rem;color:var(--slate);margin-bottom:1.5rem;">Campaign: GovCon SubReddits · Jan 1 - Mar 25, 2026 · $9,769 spend · 794.7K impressions · 4,200 clicks · $2.33 CPC · 0.529% CTR</p>
+
+    <!-- Top-line stat bar -->
+    <div class="grid-3" style="margin-bottom:1.5rem;">
+      <div class="card fade-up" style="background:var(--amber);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">$9,769</div>
+        <div style="font-size:.8rem;color:#FEF3C7;margin-top:.2rem;">Total Spend</div>
+      </div>
+      <div class="card fade-up" style="background:var(--navy);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">794,686</div>
+        <div style="font-size:.8rem;color:var(--slate-lt);margin-top:.2rem;">Impressions · $12.29 eCPM</div>
+      </div>
+      <div class="card fade-up" style="background:var(--teal);border:none;text-align:center;padding:1.25rem .5rem;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--white);">4,200</div>
+        <div style="font-size:.8rem;color:#CCFBF1;margin-top:.2rem;">Clicks · $2.33 CPC · 0.529% CTR</div>
+      </div>
+    </div>
+
+    <!-- Subreddit charts -->
+    <div class="grid-2" style="margin-bottom:1rem;">
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">Spend by Subreddit</div>
+        <div class="chart-sub">r/washingtondc dominates - DC-metro audience is the govcon buyer base on Reddit</div>
+        <canvas id="redditSpendChart" height="260"></canvas>
+      </div>
+      <div class="chart-wrap fade-up">
+        <div class="chart-title">% of Audience by Subreddit</div>
+        <div class="chart-sub">Audience share across targeted communities</div>
+        <canvas id="redditAudienceChart" height="260"></canvas>
+      </div>
+    </div>
+
+    <div class="card fade-up" style="padding:1.5rem;">
+      <div style="font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:1rem;">Subreddit Breakdown - Full Table</div>
+      <table>
+        <thead>
+          <tr><th>Subreddit</th><th>% of Audience</th><th>Spend (USD)</th><th>Spend Share</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>r/washingtondc</strong> <span style="font-size:.72rem;color:var(--slate-lt);margin-left:.5rem;">Geographic - DC metro</span></td><td class="td-amber">87.00%</td><td class="td-amber">$4,820.78</td><td><div style="height:8px;border-radius:4px;background:var(--amber);width:100%"></div></td></tr>
+          <tr><td>r/govfire</td><td class="td-slate">9.39%</td><td class="td-slate">$549.48</td><td><div style="height:8px;border-radius:4px;background:var(--slate-lt);width:9.5%"></div></td></tr>
+          <tr><td>r/governmentcontracting</td><td class="td-slate">5.25%</td><td class="td-slate">$287.13</td><td><div style="height:8px;border-radius:4px;background:var(--slate-lt);width:5%"></div></td></tr>
+          <tr><td>r/defensecontracting</td><td class="td-slate">1.88%</td><td class="td-slate">$90.48</td><td><div style="height:8px;border-radius:4px;background:var(--slate-lt);width:1.9%"></div></td></tr>
+          <tr><td>r/governmentcontractor</td><td class="td-slate">0.35%</td><td class="td-slate">$21.22</td><td><div style="height:8px;border-radius:4px;background:var(--light);width:0.4%"></div></td></tr>
+          <tr><td>r/govcon</td><td class="td-slate">0.25%</td><td class="td-slate">$14.86</td><td><div style="height:8px;border-radius:4px;background:var(--light);width:0.3%"></div></td></tr>
+          <tr><td>r/govtech</td><td class="td-slate">0.02%</td><td class="td-slate">$2.12</td><td><div style="height:8px;border-radius:4px;background:var(--light);width:0.1%"></div></td></tr>
+          <tr><td>r/fedgovcon</td><td class="td-slate">0.01%</td><td class="td-slate">$0.00</td><td><div style="height:8px;border-radius:4px;background:var(--light);width:0.1%"></div></td></tr>
+        </tbody>
+      </table>
+      <div class="insight" style="margin-top:1rem;">
+        <strong>Key insight:</strong> At <strong>$2.33 CPC</strong> and <strong>0.529% CTR</strong>, Reddit is performing competitively for a brand awareness channel - Reddit's avg B2B CTR is 0.3-0.5%, so GovDash is above benchmark. r/washingtondc accounts for 87% of spend but is a geo community, not govcon-specific - the audience skews DC-metro because that's where the govcon buyer lives. <strong>Q2 recommendation:</strong> Maintain r/washingtondc for reach efficiency, and increase budget in r/governmentcontracting, r/defensecontracting, and r/SecurityClearance for higher-intent targeting ahead of Agent Mode and Proposal Cloud launches.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: NAVATTIC
+══════════════════════════════════════════ -->
+<section id="navattic">
+  <div class="section-label">05 - Interactive Demos</div>
+  <h2>Navattic Demo Influence</h2>
+  <p class="section-sub">HubSpot contact activity · Feb 24 - Mar 27, 2026 · Which companies are exploring which parts of the product</p>
+
+  <!-- Hero KPIs -->
+  <div class="grid-4" style="margin-bottom:2rem;">
+    <div class="card kpi card-accent fade-up">
+      <div class="kpi-val" style="color:var(--blue);">1,062</div>
+      <div class="kpi-label">Total Demo Views</div>
+    </div>
+    <div class="card kpi card-accent card-accent-teal fade-up">
+      <div class="kpi-val" style="color:var(--teal);">606</div>
+      <div class="kpi-label">Unique Companies</div>
+    </div>
+    <div class="card kpi card-accent card-accent-green fade-up">
+      <div class="kpi-val" style="color:var(--green);">11</div>
+      <div class="kpi-label">Tours Available</div>
+    </div>
+    <div class="card kpi card-accent card-accent-amber fade-up">
+      <div class="kpi-val" style="color:var(--amber);">7</div>
+      <div class="kpi-label">Multi-Tour Companies<br><span style="font-size:.7rem;font-weight:400;">(high intent)</span></div>
+    </div>
+  </div>
+
+  <!-- Tour breakdown + weekly trend -->
+  <div class="grid-2" style="margin-bottom:2rem;">
+    <div class="chart-wrap fade-up">
+      <div class="chart-title">Views by Tour / Product Area</div>
+      <div class="chart-sub">Total 1,062 views - which parts of the product attract the most interest</div>
+      <canvas id="navatticTourChart" height="280"></canvas>
+    </div>
+    <div class="chart-wrap fade-up">
+      <div class="chart-title">Daily Demo Views - March Trend</div>
+      <div class="chart-sub">Mar 15 - Mar 27, 2026 · activity picking up mid-March</div>
+      <canvas id="navatticTrendChart" height="280"></canvas>
+    </div>
+  </div>
+
+  <!-- UTM Attribution -->
+  <div class="chart-wrap fade-up" style="margin-bottom:2rem;">
+    <div class="chart-title">Demo Views by UTM Campaign Source</div>
+    <div class="chart-sub">Named campaigns driving contacts to Navattic tours</div>
+    <canvas id="navatticUtmChart" height="160"></canvas>
+  </div>
+
+  <!-- Company pipeline tabs -->
+  <div class="card fade-up" style="padding:1.5rem;margin-bottom:2rem;">
+    <div class="tab-wrap">
+      <button class="tab-btn active" onclick="switchTab('nav-all')">All Companies</button>
+      <button class="tab-btn" onclick="switchTab('nav-multi')">Multi-Tour (High Intent)</button>
+      <button class="tab-btn" onclick="switchTab('nav-capture')">Capture Cloud Interest</button>
+      <button class="tab-btn" onclick="switchTab('nav-proposal')">Proposal Cloud Interest</button>
+    </div>
+
+    <!-- All Companies -->
+    <div id="tab-nav-all" class="tab-panel active">
+      <p style="font-size:.82rem;color:var(--slate);margin-bottom:1rem;">Top 20 companies by total demo views - excludes internal/test records</p>
+      <table>
+        <thead><tr><th>Company</th><th>Total Views</th><th>Product Tours Viewed</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Henry Jackson Foundation</strong></td><td class="td-blue">55</td><td><span class="tour-tag tag-proposal">Proposal Cloud ×55</span></td><td class="td-amber">🔥 Very high - deep Proposal exploration</td></tr>
+          <tr><td><strong>Purple Jay</strong></td><td class="td-blue">48</td><td><span class="tour-tag tag-tour">Product Tour ×48</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>ALAKA'INA FOUNDATION</strong></td><td class="td-blue">44</td><td><span class="tour-tag tag-capture">Capture Cloud ×44</span></td><td class="td-amber">🔥 Very high - deep Capture exploration</td></tr>
+          <tr><td><strong>SRC, Inc.</strong></td><td class="td-blue">33</td><td><span class="tour-tag tag-tour">Product Tour ×33</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>Emmes</strong></td><td class="td-blue">28</td><td><span class="tour-tag tag-capture">Capture Cloud ×28</span></td><td class="td-amber">High - Capture-focused</td></tr>
+          <tr><td><strong>North Shore Architectural Stone</strong></td><td class="td-blue">28</td><td><span class="tour-tag tag-tour">Product Tour ×28</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>Lucayan Technology Solutions LLC</strong></td><td class="td-blue">3</td><td><span class="tour-tag tag-tour">Product Tour ×3</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>SCA Group</strong></td><td class="td-blue">19</td><td><span class="tour-tag tag-tour">Product Tour ×19</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>SENTAR, INC.</strong></td><td class="td-blue">14</td><td><span class="tour-tag tag-tour">Product Tour ×14</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>ATLAS TECHNOLOGIES, INC.</strong></td><td class="td-blue">10</td><td><span class="tour-tag tag-proposal">Proposal Cloud ×10</span></td><td class="td-amber">High - Proposal-focused</td></tr>
+          <tr><td><strong>Visionquest National Ltd</strong></td><td class="td-blue">7</td><td><span class="tour-tag tag-contract">Contract Cloud ×7</span></td><td class="td-amber">High - Contract-focused</td></tr>
+          <tr><td><strong>Seneca Holdings</strong></td><td class="td-blue">5</td><td><span class="tour-tag tag-tour">Product Tour ×5</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>Roku Management</strong></td><td class="td-blue">6</td><td><span class="tour-tag tag-tour">Product Tour ×6</span></td><td class="td-slate">Broad product interest</td></tr>
+          <tr><td><strong>RAILHEAD, INC.</strong></td><td class="td-blue">3</td><td><span class="tour-tag tag-contract">Contract Cloud ×3</span></td><td class="td-slate">Contract-focused</td></tr>
+          <tr><td><strong>DEPARTMENT OF VETERANS AFFAIRS</strong></td><td class="td-blue">3</td><td><span class="tour-tag tag-tour">Product Tour ×2</span> <span class="tour-tag tag-proposal">Proposal Cloud ×1</span></td><td class="td-green">⭐ Multi-tour - Federal agency</td></tr>
+          <tr><td><strong>ORACLE AMERICA, INC</strong></td><td class="td-blue">3</td><td><span class="tour-tag tag-tour">Product Tour ×2</span> <span class="tour-tag tag-capture">Capture Cloud ×1</span></td><td class="td-green">Multi-tour - Enterprise</td></tr>
+          <tr><td><strong>Tyto Athene</strong></td><td class="td-blue">3</td><td><span class="tour-tag tag-capture">Capture Cloud ×3</span></td><td class="td-slate">Capture-focused</td></tr>
+          <tr><td><strong>TOTAL SYSTEMS TECHNOLOGIES CORP</strong></td><td class="td-blue">3</td><td><span class="tour-tag tag-capture">Capture Cloud 1/20 ×3</span></td><td class="td-slate">Capture-focused</td></tr>
+          <tr><td><strong>Skybridge Tactical</strong></td><td class="td-blue">2</td><td><span class="tour-tag tag-tour">Product Tour ×1</span> <span class="tour-tag tag-capture">Capture Cloud ×1</span></td><td class="td-green">Multi-tour</td></tr>
+          <tr><td><strong>UnifyApps</strong></td><td class="td-blue">2</td><td><span class="tour-tag tag-capture">Capture Cloud ×1</span> <span class="tour-tag tag-tour">Product Tour ×1</span></td><td class="td-green">Multi-tour</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Multi-Tour -->
+    <div id="tab-nav-multi" class="tab-panel">
+      <div class="insight" style="margin-bottom:1rem;">Companies that explored <strong>2+ different product tours</strong> signal multi-feature interest - these are the highest-priority pipeline companies for sales follow-up.</div>
+      <table>
+        <thead><tr><th>Company</th><th>Tours Viewed</th><th>Total Views</th><th>Interest Signal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DEPARTMENT OF VETERANS AFFAIRS</strong></td><td><span class="tour-tag tag-tour">Product Tour</span> <span class="tour-tag tag-proposal">Proposal Cloud</span></td><td class="td-blue">3</td><td>⭐ Federal agency - platform + proposals</td></tr>
+          <tr><td><strong>ORACLE AMERICA, INC</strong></td><td><span class="tour-tag tag-tour">Product Tour</span> <span class="tour-tag tag-capture">Capture Cloud</span></td><td class="td-blue">3</td><td>Enterprise - platform + capture mgmt</td></tr>
+          <tr><td><strong>UnifyApps</strong></td><td><span class="tour-tag tag-capture">Capture Cloud</span> <span class="tour-tag tag-tour">Product Tour</span></td><td class="td-blue">2</td><td>Capture-first, exploring platform</td></tr>
+          <tr><td><strong>Skybridge Tactical</strong></td><td><span class="tour-tag tag-tour">Product Tour</span> <span class="tour-tag tag-capture">Capture Cloud</span></td><td class="td-blue">2</td><td>Platform + capture management</td></tr>
+          <tr><td><strong>Testing.com</strong></td><td><span class="tour-tag tag-capture">Capture Cloud</span> <span class="tour-tag tag-proposal">Proposal Cloud</span></td><td class="td-blue">2</td><td>Full workflow - capture through proposal</td></tr>
+          <tr><td><strong>inboxorigin.com</strong></td><td><span class="tour-tag tag-tour">Product Tour</span> <span class="tour-tag tag-capture">Capture Cloud 1/20</span></td><td class="td-blue">2</td><td>Platform + capture interest</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Capture Cloud -->
+    <div id="tab-nav-capture" class="tab-panel">
+      <p style="font-size:.82rem;color:var(--slate);margin-bottom:1rem;">122 total Capture Cloud views · companies focused on capture management workflows</p>
+      <table>
+        <thead><tr><th>Company</th><th>Views</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ALAKA'INA FOUNDATION</strong></td><td class="td-blue">44</td><td class="td-amber">🔥 Very high engagement - priority follow-up</td></tr>
+          <tr><td><strong>Emmes</strong></td><td class="td-blue">28</td><td class="td-amber">High engagement - deep Capture exploration</td></tr>
+          <tr><td><strong>ORACLE AMERICA, INC</strong></td><td class="td-blue">1</td><td class="td-green">Also viewed Product Tour - multi-feature</td></tr>
+          <tr><td><strong>Tyto Athene</strong></td><td class="td-blue">3</td><td class="td-slate">Capture-focused</td></tr>
+          <tr><td><strong>Government Executive</strong></td><td class="td-blue">3</td><td class="td-slate">Media company - potential partnership signal</td></tr>
+          <tr><td><strong>TOTAL SYSTEMS TECHNOLOGIES CORP</strong></td><td class="td-blue">3</td><td class="td-slate">Capture Cloud 1/20 variant</td></tr>
+          <tr><td><strong>Skybridge Tactical</strong></td><td class="td-blue">1</td><td class="td-green">Also viewed Product Tour</td></tr>
+          <tr><td><strong>UnifyApps</strong></td><td class="td-blue">1</td><td class="td-green">Also viewed Product Tour</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Proposal Cloud -->
+    <div id="tab-nav-proposal" class="tab-panel">
+      <p style="font-size:.82rem;color:var(--slate);margin-bottom:1rem;">111 total Proposal Cloud views · Pricer Launch campaign drove 8 directly</p>
+      <table>
+        <thead><tr><th>Company</th><th>Views</th><th>UTM / Source</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Henry Jackson Foundation</strong></td><td class="td-blue">55</td><td class="td-slate">Direct / unknown</td><td class="td-amber">🔥 Highest engagement of any company - urgent follow-up</td></tr>
+          <tr><td><strong>ATLAS TECHNOLOGIES, INC.</strong></td><td class="td-blue">10</td><td class="td-slate">Direct</td><td class="td-amber">High intent - Proposal-focused</td></tr>
+          <tr><td><strong>AD HOC RESEARCH ASSOCIATES LLC</strong></td><td class="td-blue">4</td><td class="td-slate">Direct</td><td class="td-slate">Proposal interest</td></tr>
+          <tr><td><strong>DEPARTMENT OF VETERANS AFFAIRS</strong></td><td class="td-blue">1</td><td class="td-slate">Direct</td><td class="td-green">⭐ Also viewed Product Tour - federal agency, high value</td></tr>
+          <tr><td><strong>Henry Jackson Foundation (Pricer Launch)</strong></td><td class="td-blue">8</td><td style="color:var(--blue);font-weight:600;">Pricer Launch campaign</td><td class="td-blue">Directly attributed to Pricer campaign</td></tr>
+        </tbody>
+      </table>
+      <div class="insight" style="margin-top:1rem;">
+        <strong>Pricer Launch → Proposal Cloud:</strong> 8 views came directly via the Pricer Launch UTM campaign - validating that the Pricer launch drove contacts deeper into the product. Henry Jackson Foundation (55 Proposal Cloud views) is the single highest-engagement company in the entire dataset.
+      </div>
+    </div>
+  </div>
+
+  <!-- Product interest heatmap -->
+  <div class="card fade-up" style="padding:1.5rem;">
+    <div style="font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.3rem;">Product Interest Map - What the Market Is Exploring</div>
+    <p style="font-size:.82rem;color:var(--slate);margin-bottom:1.25rem;">Tour views as a proxy for feature demand across the pipeline</p>
+    <div style="display:flex;flex-direction:column;gap:.6rem;">
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.2rem;">
+          <span style="font-size:.85rem;font-weight:600;color:var(--dark);">GovDash Product Tour <span style="font-size:.75rem;font-weight:400;color:var(--slate);">- full platform overview</span></span>
+          <span style="font-size:.85rem;font-weight:700;color:var(--blue);">789 views · 71.7%</span>
+        </div>
+        <div style="background:var(--light);border-radius:4px;height:10px;"><div style="background:var(--blue);width:71.7%;height:10px;border-radius:4px;"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.2rem;">
+          <span style="font-size:.85rem;font-weight:600;color:var(--dark);">Capture Cloud <span style="font-size:.75rem;font-weight:400;color:var(--slate);">- capture management</span></span>
+          <span style="font-size:.85rem;font-weight:700;color:var(--teal);">122 views · 11.1%</span>
+        </div>
+        <div style="background:var(--light);border-radius:4px;height:10px;"><div style="background:var(--teal);width:11.1%;height:10px;border-radius:4px;"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.2rem;">
+          <span style="font-size:.85rem;font-weight:600;color:var(--dark);">Proposal Cloud <span style="font-size:.75rem;font-weight:400;color:var(--slate);">- proposal writing & management</span></span>
+          <span style="font-size:.85rem;font-weight:700;color:var(--green);">111 views · 10.1%</span>
+        </div>
+        <div style="background:var(--light);border-radius:4px;height:10px;"><div style="background:var(--green);width:10.1%;height:10px;border-radius:4px;"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.2rem;">
+          <span style="font-size:.85rem;font-weight:600;color:var(--dark);">GovDash Contract Cloud <span style="font-size:.75rem;font-weight:400;color:var(--slate);">- contract management</span></span>
+          <span style="font-size:.85rem;font-weight:700;color:var(--slate);">23 views · 2.2%</span>
+        </div>
+        <div style="background:var(--light);border-radius:4px;height:10px;"><div style="background:var(--slate-lt);width:2.1%;height:10px;border-radius:4px;"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:.2rem;">
+          <span style="font-size:.85rem;font-weight:600;color:var(--dark);">Other tours <span style="font-size:.75rem;font-weight:400;color:var(--slate);">- Pricer, Teaming, Event variants</span></span>
+          <span style="font-size:.85rem;font-weight:700;color:var(--slate);">17 views · 1.5%</span>
+        </div>
+        <div style="background:var(--light);border-radius:4px;height:10px;"><div style="background:var(--light);width:1.5%;height:10px;border-radius:4px;border:1px solid var(--slate-lt)"></div></div>
+      </div>
+    </div>
+    <div class="insight" style="margin-top:1.25rem;">
+      <strong>Takeaway:</strong> The Product Tour dominates at 74% - most prospects want the full overview before going deeper. Capture Cloud and Proposal Cloud are the two strongest feature-specific signals, together representing 22% of views and pointing to the core use cases driving pipeline. <strong>For Q2 launches:</strong> Building Navattic tours for Discover modules, Agent Mode, and Proposal Cloud overhaul should be prioritized given the proven influence of interactive demos in the funnel.
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: AI AUTOMATION + MOVING FORWARD
+══════════════════════════════════════════ -->
+<section id="forward">
+  <div class="section-label">06 - AI + Moving Forward</div>
+  <h2>AI Automation &amp; What's Next</h2>
+  <p class="section-sub">Where we're headed in Q2 and beyond - tools we're adopting, gaps we're closing, decisions we need to make</p>
+
+  <!-- ── WEAKNESSES ───────────────────────────────────────────── -->
+  <div style="margin-bottom:2.5rem;">
+    <h3 style="font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;">
+      <span style="background:#FEF2F2;color:#DC2626;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.05em;">GAPS TO CLOSE</span>
+      Areas Needing Uplevel
+    </h3>
+    <div class="grid-3">
+
+      <!-- Ad Budget -->
+      <div class="card fade-up" style="padding:1.5rem;border-top:3px solid #DC2626;">
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">$</div>
+          <div style="font-size:.95rem;font-weight:700;color:var(--dark);">Ad Budget Management</div>
+        </div>
+        <p style="font-size:.83rem;color:var(--slate);line-height:1.6;margin-bottom:1rem;">Campaigns need to be more tightly tied to budget allocation. Spend is distributed but not always intentional - we need clearer per-campaign budgets, pacing rules, and performance gates before scaling.</p>
+        <div style="font-size:.78rem;font-weight:600;color:#DC2626;margin-bottom:.5rem;">Action Items</div>
+        <ul style="font-size:.8rem;color:var(--slate);line-height:1.7;padding-left:1.1rem;margin:0;">
+          <li>Set explicit monthly budget caps per channel</li>
+          <li>Build a simple budget tracker tied to HubSpot ROI</li>
+          <li>Pause underperforming campaigns faster - tighter review cadence</li>
+          <li>Explore AI-assisted bid management with Maintouch</li>
+        </ul>
+      </div>
+
+      <!-- Web / Brand Design -->
+      <div class="card fade-up" style="padding:1.5rem;border-top:3px solid #DC2626;">
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">&#9881;</div>
+          <div style="font-size:.95rem;font-weight:700;color:var(--dark);">Web &amp; Brand Design</div>
+        </div>
+        <p style="font-size:.83rem;color:var(--slate);line-height:1.6;margin-bottom:1rem;">The current site needs a design quality uplevel. Brand consistency across landing pages, ads, and product is inconsistent. A platform decision is needed before investing further in the current build.</p>
+        <div style="font-size:.78rem;font-weight:600;color:#DC2626;margin-bottom:.5rem;">Platform Decision Needed</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.75rem;">
+          <div style="background:#F8FAFC;border-radius:8px;padding:.6rem .85rem;font-size:.8rem;">
+            <span style="font-weight:700;color:var(--dark);">Framer</span>
+            <span style="color:var(--slate);"> - Fast, design-first, great animations. Less flexible for complex CMS/logic.</span>
+          </div>
+          <div style="background:#F8FAFC;border-radius:8px;padding:.6rem .85rem;font-size:.8rem;">
+            <span style="font-weight:700;color:var(--dark);">Webflow</span>
+            <span style="color:var(--slate);"> - Proven for B2B SaaS, CMS-capable, larger talent pool. Heavier to maintain.</span>
+          </div>
+          <div style="background:#F8FAFC;border-radius:8px;padding:.6rem .85rem;font-size:.8rem;">
+            <span style="font-weight:700;color:var(--dark);">Coded Site</span>
+            <span style="color:var(--slate);"> - Full control, best performance, SEO ceiling is highest. Requires eng resources.</span>
+          </div>
+        </div>
+        <div style="font-size:.78rem;color:var(--slate);font-style:italic;">Needs team alignment before Q2 campaigns scale - this decision gates landing page quality.</div>
+      </div>
+
+      <!-- Video -->
+      <div class="card fade-up" style="padding:1.5rem;border-top:3px solid #DC2626;">
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">&#9654;</div>
+          <div style="font-size:.95rem;font-weight:700;color:var(--dark);">Video Quality Uplevel</div>
+        </div>
+        <p style="font-size:.83rem;color:var(--slate);line-height:1.6;margin-bottom:1rem;">Current video quality is not at the bar needed for paid ads, product launches, or brand presence. Q2 launches - Discover modules, Agent Mode, Proposal Cloud overhaul - all need strong video assets.</p>
+        <div style="font-size:.78rem;font-weight:600;color:#DC2626;margin-bottom:.5rem;">Path Forward</div>
+        <ul style="font-size:.8rem;color:var(--slate);line-height:1.7;padding-left:1.1rem;margin:0;">
+          <li>Actively in conversations with multiple video agencies</li>
+          <li>Maintouch videographer available as a resource</li>
+          <li>If current video performance (Chris) does not improve - agency transition underway</li>
+          <li>Target: launch-quality video ready for Q2 product releases</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AI & AUTOMATION ──────────────────────────────────────── -->
+  <div>
+    <h3 style="font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;">
+      <span style="background:#EFF6FF;color:var(--blue);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.05em;">EXPLORING NOW</span>
+      AI Tools &amp; Automation Stack
+    </h3>
+    <p style="font-size:.85rem;color:var(--slate);margin-bottom:1.5rem;max-width:680px;">We're moving toward a deeper, more integrated use of AI across the marketing workflow - not just for content generation but for research, automation, campaign ops, and building internal tools faster.</p>
+
+    <div class="grid-2" style="margin-bottom:1.5rem;">
+
+      <!-- Claude CoWork -->
+      <div class="card fade-up" style="padding:1.5rem;border-left:3px solid var(--blue);">
+        <div style="display:flex;align-items:flex-start;gap:.85rem;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.3rem;">Claude CoWork</div>
+            <p style="font-size:.82rem;color:var(--slate);line-height:1.6;margin-bottom:.75rem;">Using Claude as a collaborative work partner across copywriting, campaign strategy, competitive research, and report generation. Moving toward structured prompting workflows so outputs are consistent and on-brand.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+              <span style="background:#EFF6FF;color:var(--blue);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Campaign briefs</span>
+              <span style="background:#EFF6FF;color:var(--blue);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Competitive research</span>
+              <span style="background:#EFF6FF;color:var(--blue);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Ad copy variants</span>
+              <span style="background:#EFF6FF;color:var(--blue);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">SEO content</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Claude Code -->
+      <div class="card fade-up" style="padding:1.5rem;border-left:3px solid var(--teal);">
+        <div style="display:flex;align-items:flex-start;gap:.85rem;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 6l-4 6 4 6M16 6l4 6-4 6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.3rem;">Claude Code</div>
+            <p style="font-size:.82rem;color:var(--slate);line-height:1.6;margin-bottom:.75rem;">Building and iterating on internal marketing tooling, reports, and dashboards without needing eng support. This report itself was built with Claude Code. Moving toward a model where marketing can ship web experiments and tools independently.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+              <span style="background:#F0FDFA;color:var(--teal);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Internal dashboards</span>
+              <span style="background:#F0FDFA;color:var(--teal);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Landing pages</span>
+              <span style="background:#F0FDFA;color:var(--teal);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Data pipelines</span>
+              <span style="background:#F0FDFA;color:var(--teal);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Reporting automation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relay -->
+      <div class="card fade-up" style="padding:1.5rem;border-left:3px solid var(--green);">
+        <div style="display:flex;align-items:flex-start;gap:.85rem;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M14 7l5 5-5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.3rem;">Relay Agents</div>
+            <p style="font-size:.82rem;color:var(--slate);line-height:1.6;margin-bottom:.75rem;">Exploring Relay for multi-step AI workflows - connecting data sources, HubSpot, and content tools into automated pipelines. The goal is to reduce manual marketing ops work and create repeatable, triggered workflows for campaigns, nurture, and reporting.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+              <span style="background:#ECFDF5;color:var(--green);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Workflow automation</span>
+              <span style="background:#ECFDF5;color:var(--green);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">HubSpot integration</span>
+              <span style="background:#ECFDF5;color:var(--green);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Campaign triggers</span>
+              <span style="background:#ECFDF5;color:var(--green);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Nurture sequences</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mosaic -->
+      <div class="card fade-up" style="padding:1.5rem;border-left:3px solid var(--amber);">
+        <div style="display:flex;align-items:flex-start;gap:.85rem;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--amber);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke="white" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="1.5" stroke="white" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="1.5" stroke="white" stroke-width="1.8"/><rect x="13" y="13" width="8" height="8" rx="1.5" stroke="white" stroke-width="1.8"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.3rem;">Mosaic <a href="https://mosaic.so/" target="_blank" style="font-size:.7rem;font-weight:400;color:var(--slate);text-decoration:none;margin-left:.35rem;">mosaic.so &nearr;</a></div>
+            <p style="font-size:.82rem;color:var(--slate);line-height:1.6;margin-bottom:.75rem;">Agentic AI video editing platform - runs video edits on autopilot so we can produce and iterate on video content without a full post-production workflow. Directly addresses the video quality gap: generate multiple cut variants from the same raw footage, A/B test them across paid channels, and keep a timeline editor for hands-on control when needed. Built for scale - the missing piece between raw footage and launch-ready video assets.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+              <span style="background:#FFFBEB;color:var(--amber);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Agentic video editing</span>
+              <span style="background:#FFFBEB;color:var(--amber);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">A/B creative variants</span>
+              <span style="background:#FFFBEB;color:var(--amber);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Autopilot production</span>
+              <span style="background:#FFFBEB;color:var(--amber);font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;">Scale from raw footage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision callout -->
+    <div style="background:var(--dark);border-radius:16px;padding:2rem 2.5rem;display:flex;align-items:flex-start;gap:1.5rem;">
+      <div style="flex-shrink:0;margin-top:.15rem;">
+        <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;">&#128161;</div>
+      </div>
+      <div>
+        <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem;">The direction: a leaner, faster, more automated marketing engine</div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,0.65);line-height:1.7;margin:0;">The goal in Q2 and beyond is to close the gap between marketing ideas and execution. With Claude Code and CoWork, we can build and ship faster. With Relay and Mosaic, we can automate the ops layer and make smarter creative decisions. The three core gaps - budget discipline, web platform, and video quality - are the blockers to remove before scaling paid and content investment. Once those are resolved, the organic and brand foundations built in Q1 give us a strong platform to grow from.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════════════════════════════════════════
+     KEY TAKEAWAYS
+══════════════════════════════════════════ -->
+<section id="takeaways" style="padding-top:4rem;padding-bottom:5rem;">
+  <div class="takeaways-wrap">
+    <div class="section-label" style="color:var(--blue-lt);">Summary</div>
+    <h2>Q1 2026 Key Takeaways</h2>
+    <div class="grid-3" style="margin-top:1.5rem;">
+      <div class="takeaway-card fade-up">
+        <div class="takeaway-num">01</div>
+        <div class="takeaway-title">Campaigns delivered exceptional ROI</div>
+        <div class="takeaway-body">FedRAMP (6,802% ROI) and Pricer (5,724% ROI) both dramatically outperformed typical benchmarks with combined spend under $7,500 and $454K in associated deal value.</div>
+      </div>
+      <div class="takeaway-card fade-up">
+        <div class="takeaway-num">02</div>
+        <div class="takeaway-title">Organic search is compounding</div>
+        <div class="takeaway-body">Clicks +4.5K, impressions +0.86M, ranked keywords +1.4K (now 2,374 tracked by SEMrush). GovDash is building durable SEO moats through glossary content, AI solution guides, and funding press coverage.</div>
+      </div>
+      <div class="takeaway-card fade-up">
+        <div class="takeaway-num">03</div>
+        <div class="takeaway-title">GovDash leads on SoV &amp; sentiment</div>
+        <div class="takeaway-body">8% share of voice with 96% sentiment - 2x the SoV of Deltek (next closest) and 26+ points higher sentiment. The brand is winning in both search visibility and reputation.</div>
+      </div>
+      <div class="takeaway-card fade-up">
+        <div class="takeaway-num">04</div>
+        <div class="takeaway-title">Paid is the #1 traffic driver</div>
+        <div class="takeaway-body">Paid (21.9K) drives 2x direct and 3.6x organic traffic. LinkedIn paid social grew 17x in Q1 - a strong signal to increase investment ahead of Q2 enterprise launches.</div>
+      </div>
+      <div class="takeaway-card fade-up">
+        <div class="takeaway-num">05</div>
+        <div class="takeaway-title">Q2 sets up a strong pipeline push</div>
+        <div class="takeaway-body">Subsidiary Management, Discover modules, Agent Mode, and Proposal Cloud overhaul position GovDash for major product-led pipeline generation across enterprise and SMB segments.</div>
+      </div>
+      <div class="takeaway-card fade-up" style="border-top-color:var(--green);">
+        <div class="takeaway-num" style="color:#6EE7B7;">06</div>
+        <div class="takeaway-title">SEO opportunity: high-impression keywords</div>
+        <div class="takeaway-body">"gsa ebuy" (5,927 impr, 0.07% CTR) and "compliance matrix" (1,453 impr, 0.34% CTR) are untapped. FedRAMP page at position 38.6 with 12.4K impressions is the single biggest SEO win available.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ COMPETITIVE ═══════════════════════════ -->
+<section id="competitive" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="section-label">05 Competitive Intelligence</div>
+  <h2>GovDash vs. The Field</h2>
+  <p class="section-sub">Share of voice, sentiment, and feature positioning across Unanet, Procurement Sciences, Deltek, and Vultron · Q1 2026</p>
+
+  <!-- ── Insight Banner ── -->
+  <div style="background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-radius:14px;padding:1.8rem 2rem;margin-bottom:2.5rem;display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start;">
+    <div style="flex:0 0 auto;">
+      <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-lt);margin-bottom:0.5rem;">Overall Position</div>
+      <div style="font-size:2.8rem;font-weight:800;color:var(--white);line-height:1;">Leading</div>
+      <div style="font-size:0.85rem;color:var(--slate-lt);margin-top:0.3rem;">across all competitors</div>
+    </div>
+    <div style="flex:1;min-width:260px;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+      <div style="background:rgba(37,99,235,0.18);border:1px solid rgba(37,99,235,0.35);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;color:var(--blue-lt);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">GovDash Share of Voice</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--white);">6%</div>
+        <div style="font-size:0.78rem;color:var(--slate-lt);">vs. 0–3% for all rivals</div>
+      </div>
+      <div style="background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.35);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;color:#6EE7B7;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">GovDash Sentiment</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--white);">94%</div>
+        <div style="font-size:0.78rem;color:var(--slate-lt);">Deltek 58% · Unanet 77%</div>
+      </div>
+      <div style="background:rgba(13,148,136,0.18);border:1px solid rgba(13,148,136,0.35);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;color:#5EEAD4;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">AI Platform Visibility</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--white);">#1</div>
+        <div style="font-size:0.78rem;color:var(--slate-lt);">Gemini 94% · ChatGPT 88%</div>
+      </div>
+      <div style="background:rgba(245,158,11,0.18);border:1px solid rgba(245,158,11,0.35);border-radius:10px;padding:1rem;">
+        <div style="font-size:0.72rem;color:#FCD34D;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">AI Drafting Mentions</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--white);">24</div>
+        <div style="font-size:0.78rem;color:var(--slate-lt);">vs. 5–11 for competitors</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Head-to-Head Cards ── -->
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2.5rem;">
+
+    <!-- Unanet -->
+    <div class="card card-accent">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);margin-bottom:0.2rem;">vs.</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--dark);">Unanet</div>
+        </div>
+        <span style="background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.3);border-radius:999px;font-size:0.72rem;font-weight:700;padding:3px 10px;">✦ Stronger Sentiment Edge</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Share of Voice</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate);">2%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Unanet</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--blue);">6%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Favorable Sentiment</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate);">77%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Unanet</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--green);">94%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.82rem;color:var(--slate);background:rgba(37,99,235,0.05);border-left:3px solid var(--blue);padding:0.6rem 0.8rem;border-radius:0 6px 6px 0;">
+        Unanet at 2% share vs our 6%, but we lead sentiment 94% vs 77%. Push GovDash's security and drafting strengths to grow share without losing favorability.
+      </div>
+    </div>
+
+    <!-- Procurement Sciences -->
+    <div class="card card-accent card-accent-teal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);margin-bottom:0.2rem;">vs.</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--dark);">Procurement Sciences</div>
+        </div>
+        <span style="background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.3);border-radius:999px;font-size:0.72rem;font-weight:700;padding:3px 10px;">✦ Stronger Sentiment Edge</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Share of Voice</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate);">3%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Proc. Sci.</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--blue);">6%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Favorable Sentiment</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate);">67%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Proc. Sci.</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--green);">94%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.82rem;color:var(--slate);background:rgba(13,148,136,0.05);border-left:3px solid var(--teal);padding:0.6rem 0.8rem;border-radius:0 6px 6px 0;">
+        Procurement Sciences 3% vs our 6% share, but trails 27 points on sentiment. Their strength in Capture Intelligence (7 mentions) is the one area to watch.
+      </div>
+    </div>
+
+    <!-- Deltek -->
+    <div class="card card-accent card-accent-amber">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);margin-bottom:0.2rem;">vs.</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--dark);">Deltek</div>
+        </div>
+        <span style="background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.3);border-radius:999px;font-size:0.72rem;font-weight:700;padding:3px 10px;">✦ Stronger & More Loved</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Share of Voice</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate);">3%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Deltek</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--blue);">6%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Favorable Sentiment</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--amber);">58%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Deltek</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--green);">94%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.82rem;color:var(--slate);background:rgba(245,158,11,0.05);border-left:3px solid var(--amber);padding:0.6rem 0.8rem;border-radius:0 6px 6px 0;">
+        Deltek's sentiment dropped 15 points to 58% — a significant erosion. We lead 36 points on favorability. Amplify security and AI drafting wins while Deltek is on the back foot.
+      </div>
+    </div>
+
+    <!-- Vultron -->
+    <div class="card card-accent card-accent-green">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);margin-bottom:0.2rem;">vs.</div>
+          <div style="font-size:1.2rem;font-weight:800;color:var(--dark);">Vultron</div>
+        </div>
+        <span style="background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.3);border-radius:999px;font-size:0.72rem;font-weight:700;padding:3px 10px;">✦ Alone in the Market</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem;">
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Share of Voice</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate-lt);">0%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Vultron</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--blue);">6%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+        <div style="background:var(--off-white);border-radius:8px;padding:0.8rem;text-align:center;">
+          <div style="font-size:0.68rem;color:var(--slate);margin-bottom:0.3rem;">Favorable Sentiment</div>
+          <div style="display:flex;justify-content:space-around;align-items:center;">
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--slate-lt);">0%</div><div style="font-size:0.65rem;color:var(--slate-lt);">Vultron</div></div>
+            <div style="color:var(--slate-lt);font-size:0.8rem;">vs</div>
+            <div><div style="font-size:1.3rem;font-weight:800;color:var(--green);">94%</div><div style="font-size:0.65rem;color:var(--slate-lt);">GovDash</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.82rem;color:var(--slate);background:rgba(16,185,129,0.05);border-left:3px solid var(--green);padding:0.6rem 0.8rem;border-radius:0 6px 6px 0;">
+        Vultron has 0% share and no measurable sentiment — we're essentially alone in this segment. Invest now to scale voice before rivals establish a presence.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Business Drivers Chart ── -->
+  <div class="card" style="margin-bottom:2.5rem;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+      <div>
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem;">Business Drivers by Frequency</div>
+        <div style="font-size:1.1rem;font-weight:800;color:var(--dark);">How Buyers Describe GovDash vs. Competitors</div>
+        <div style="font-size:0.82rem;color:var(--slate);margin-top:0.2rem;">Number of buyer mentions per driver across tracked conversations</div>
+      </div>
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;align-items:center;font-size:0.75rem;">
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#0F1F3D;border-radius:2px;display:inline-block;"></span>GovDash</span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#2563EB;border-radius:2px;display:inline-block;"></span>Unanet</span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#0D9488;border-radius:2px;display:inline-block;"></span>Proc. Sciences</span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#F59E0B;border-radius:2px;display:inline-block;"></span>Deltek</span>
+      </div>
+    </div>
+    <div class="chart-wrap" style="height:360px;">
+      <canvas id="bizDriversChart"></canvas>
+    </div>
+  </div>
+
+  <!-- ── AI Platform Perception + Sentiment Heatmap ── -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2.5rem;">
+
+    <!-- AI Platform Chart -->
+    <div class="card">
+      <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem;">AI Platform Visibility</div>
+      <div style="font-size:1.05rem;font-weight:800;color:var(--dark);margin-bottom:0.25rem;">Competitive Perception by Platform</div>
+      <div style="font-size:0.8rem;color:var(--green);font-weight:600;margin-bottom:1rem;">✦ Leading across all AI platforms</div>
+      <div class="chart-wrap" style="height:300px;">
+        <canvas id="aiPlatformChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Sentiment Heatmap -->
+    <div class="card">
+      <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.3rem;">Sentiment by Feature Category</div>
+      <div style="font-size:1.05rem;font-weight:800;color:var(--dark);margin-bottom:0.25rem;">98–100% Across Core GovCon Features</div>
+      <div style="font-size:0.8rem;color:var(--green);font-weight:600;margin-bottom:1rem;">✦ Leading on sentiment — beating Deltek by 25–65 pts</div>
+      <!-- Heatmap Table -->
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.72rem;">
+          <thead>
+            <tr style="background:var(--off-white);">
+              <th style="text-align:left;padding:6px 8px;color:var(--slate);font-weight:600;border-bottom:1px solid var(--light);">Feature Category</th>
+              <th style="padding:6px 6px;color:var(--blue);font-weight:700;border-bottom:1px solid var(--light);text-align:center;">GovDash</th>
+              <th style="padding:6px 6px;color:var(--slate);font-weight:600;border-bottom:1px solid var(--light);text-align:center;">Unanet</th>
+              <th style="padding:6px 6px;color:var(--slate);font-weight:600;border-bottom:1px solid var(--light);text-align:center;">Proc.Sci</th>
+              <th style="padding:6px 6px;color:var(--slate);font-weight:600;border-bottom:1px solid var(--light);text-align:center;">Deltek</th>
+            </tr>
+          </thead>
+          <tbody id="heatmapBody"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.8rem;flex-wrap:wrap;font-size:0.65rem;color:var(--slate);">
+        <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#0F766E;border-radius:2px;"></span>93–100%</span>
+        <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#10B981;border-radius:2px;"></span>61–92%</span>
+        <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#FCD34D;border-radius:2px;"></span>40–60%</span>
+        <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:#F97316;border-radius:2px;"></span>8–39%</span>
+        <span style="display:flex;align-items:center;gap:3px;"><span style="width:10px;height:10px;background:var(--light);border-radius:2px;"></span>No data</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Strategic Insights ── -->
+  <div>
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.4rem;">Strategic Insights</div>
+    <div style="font-size:1.2rem;font-weight:800;color:var(--dark);margin-bottom:1.25rem;">5 Actions to Extend the Lead in Q2</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+
+      <div class="card" style="display:flex;gap:1rem;align-items:flex-start;">
+        <div style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:0.85rem;">1</div>
+        <div>
+          <div style="font-weight:700;color:var(--dark);margin-bottom:0.3rem;">Sentiment Moat Advantage</div>
+          <div style="font-size:0.82rem;color:var(--slate);">Leverage 93.9% positive share versus Deltek's 57.7% as low-risk choice proof. Use in competitive displacement campaigns and sales decks.</div>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex;gap:1rem;align-items:flex-start;">
+        <div style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:0.85rem;">2</div>
+        <div>
+          <div style="font-weight:700;color:var(--dark);margin-bottom:0.3rem;">Codify the Five-Pillar Story</div>
+          <div style="font-size:0.82rem;color:var(--slate);">Institutionalize AI-first, unified lifecycle, security, speed, and integrations as mandatory messaging across all exec assets and web copy.</div>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex;gap:1rem;align-items:flex-start;">
+        <div style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:0.85rem;">3</div>
+        <div>
+          <div style="font-weight:700;color:var(--dark);margin-bottom:0.3rem;">Break the Mid-Market Ceiling</div>
+          <div style="font-size:0.82rem;color:var(--slate);">Counter the "SMB-only" perception with large-prime case studies featuring IDIQ factories and CPARS-driven recompetes to attract enterprise deals.</div>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex;gap:1rem;align-items:flex-start;">
+        <div style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:0.85rem;">4</div>
+        <div>
+          <div style="font-weight:700;color:var(--dark);margin-bottom:0.3rem;">Reframe Designed Constraints</div>
+          <div style="font-size:0.82rem;color:var(--slate);">Publish a "Where GovDash Fits" guide clarifying ERP gaps, IL5 limits, and integration roadmap as deliberate, security-first design choices.</div>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex;gap:1rem;align-items:flex-start;grid-column:1/-1;">
+        <div style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:0.85rem;">5</div>
+        <div>
+          <div style="font-weight:700;color:var(--dark);margin-bottom:0.3rem;">Own the Pragmatic Security Sweet-Spot</div>
+          <div style="font-size:0.82rem;color:var(--slate);">Position Moderate-equivalent, CUI-focused security as optimal for 80–90% of GovCon work versus niche IL5 competitors. Security sentiment score of 100 is a rare differentiator — surface it in every channel.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>GovDash</strong> · Q1 2026 Product Marketing Report · Jan - Mar 2026 · Prepared March 26, 2026
+</footer>
+
+<script>
+// ── Chart defaults ──────────────────────────────────────────────────────────
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+Chart.defaults.color = "#64748B";
+
+const BLUE    = "#2563EB";
+const TEAL    = "#0D9488";
+const GREEN   = "#10B981";
+const AMBER   = "#F59E0B";
+const NAVY    = "#0F1F3D";
+const SLATE   = "#64748B";
+const SLATE_L = "#94A3B8";
+const INDIGO  = "#6366F1";
+
+// ── ROI Chart ──────────────────────────────────────────────────────────────
+new Chart(document.getElementById("roiChart"), {
+  type: "bar",
+  data: {
+    labels: ["FedRAMP Launch (Jan 5)", "Pricer Launch (Feb)"],
+    datasets: [{
+      label: "ROI %",
+      data: [6802, 5724],
+      backgroundColor: [BLUE, GREEN],
+      borderRadius: 8,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()}% ROI` }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { callback: v => v.toLocaleString() + "%" },
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Organic Clicks over time - Q1 2026 vs Q4 2025 ───────────────────────────
+// Labels = week number (Week 1 of quarter ... Week 13)
+const clickWeekLabels = ["Wk 1","Wk 2","Wk 3","Wk 4","Wk 5","Wk 6","Wk 7","Wk 8","Wk 9","Wk 10","Wk 11","Wk 12","Wk 13"];
+// Q1 2026: Dec 25 - Mar 26 (GSC data, weekly totals)
+const clicksQ1 = [169, 391, 532, 1111, 826, 761, 723, 675, 840, 722, 752, 722, 724];
+// Q4 2025: Sep 25 - Dec 24 (real GSC data, weekly totals)
+const clicksQ4 = [305, 285, 234, 256, 384, 328, 336, 398, 360, 325, 412, 406, 248];
+
+new Chart(document.getElementById("clicksChart"), {
+  type: "line",
+  data: {
+    labels: clickWeekLabels,
+    datasets: [
+      {
+        label: "Q1 2026 (Dec 25 - Mar 24)",
+        data: clicksQ1,
+        borderColor: BLUE,
+        backgroundColor: "rgba(37,99,235,0.08)",
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointBackgroundColor: BLUE,
+        borderWidth: 2.5,
+      },
+      {
+        label: "Q4 2025 (Sep 25 - Dec 24)",
+        data: clicksQ4,
+        borderColor: SLATE_L,
+        backgroundColor: "rgba(148,163,184,0.06)",
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointBackgroundColor: SLATE_L,
+        borderWidth: 2,
+        borderDash: [5, 4],
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true, font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label.split(" ")[0]} ${ctx.dataset.label.split(" ")[1]}: ${ctx.raw.toLocaleString()} clicks`,
+          afterBody: (items) => {
+            if (items.length === 2) {
+              const q1 = items[0].raw, q4 = items[1].raw;
+              const diff = q1 - q4;
+              const pct = ((diff / q4) * 100).toFixed(0);
+              return [`\u0394 ${diff > 0 ? "+" : ""}${diff} vs Q4 (${pct}%)`];
+            }
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] },
+        ticks: { callback: v => v.toLocaleString() }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Branded vs Non-Branded ──────────────────────────────────────────────────
+new Chart(document.getElementById("brandedChart"), {
+  type: "doughnut",
+  data: {
+    labels: ["Branded (3.4K)", "Non-Branded (5.3K)"],
+    datasets: [{
+      data: [3400, 5330],
+      backgroundColor: [BLUE, TEAL],
+      borderWidth: 0,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: "68%",
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} clicks` } }
+    }
+  }
+});
+
+// ── SoV Chart ──────────────────────────────────────────────────────────────
+new Chart(document.getElementById("sovChart"), {
+  type: "bar",
+  data: {
+    labels: ["GovDash", "Deltek", "Procurement\nSciences", "Unanet", "Govsignals"],
+    datasets: [
+      {
+        label: "Share of Voice %",
+        data: [8, 4, 3, 2.5, 0.1],
+        backgroundColor: [BLUE, SLATE_L, SLATE_L, SLATE_L, SLATE_L],
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+      {
+        label: "Sentiment Score %",
+        data: [96, 70, 73, 75, 50],
+        backgroundColor: [GREEN + "CC", AMBER + "88", AMBER + "88", AMBER + "88", SLATE_L + "88"],
+        borderRadius: 6,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+    },
+    scales: {
+      y: {
+        max: 110,
+        ticks: { callback: v => v + "%" },
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Ads Keyword CTR Chart ──────────────────────────────────────────────────
+new Chart(document.getElementById("adsKwChart"), {
+  type: "bar",
+  data: {
+    labels: [
+      "nextstage co.", "govdash", "samsearch ai",
+      "proposal auto.", "sam.gov", "govdash ai",
+      "gov't network", "sam gov't", "bid & capture", "gov't software"
+    ],
+    datasets: [{
+      label: "CTR %",
+      data: [50, 38.62, 36.13, 31.9, 30.57, 26.25, 25, 25, 23.5, 20],
+      backgroundColor: [BLUE, BLUE, TEAL, BLUE, TEAL, BLUE, TEAL, TEAL, TEAL, TEAL],
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw}% CTR` } }
+    },
+    scales: {
+      x: {
+        ticks: { callback: v => v + "%" },
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] }
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Channel (HubSpot) Bar Chart ─────────────────────────────────────────────
+new Chart(document.getElementById("channelChart"), {
+  type: "bar",
+  data: {
+    labels: ["Paid", "Direct", "Paid Social", "Organic", "Referrals", "Other", "Social", "Email", "AI Referrals"],
+    datasets: [{
+      label: "Visitors",
+      data: [21947, 14490, 6133, 6034, 4693, 3476, 1936, 738, 297],
+      backgroundColor: [BLUE, NAVY, TEAL, GREEN, INDIGO, SLATE_L, AMBER, "#EC4899", "#8B5CF6"],
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} visitors` } }
+    },
+    scales: {
+      x: {
+        ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0)+"K" : v },
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] }
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Monthly Traffic Trend ───────────────────────────────────────────────────
+new Chart(document.getElementById("trafficChart"), {
+  type: "line",
+  data: {
+    labels: ["Dec 2025", "Jan 2026", "Feb 2026", "Mar 2026"],
+    datasets: [
+      { label: "Paid", data: [1106, 8522, 7279, 5040], borderColor: BLUE, backgroundColor: BLUE+"22", fill: true, tension: 0.4, pointRadius: 5 },
+      { label: "Direct", data: [568, 5220, 4969, 3733], borderColor: NAVY, backgroundColor: "transparent", tension: 0.4, pointRadius: 5 },
+      { label: "Paid Social", data: [148, 1072, 2386, 2527], borderColor: TEAL, backgroundColor: "transparent", tension: 0.4, pointRadius: 5 },
+      { label: "Organic", data: [106, 1906, 2018, 2004], borderColor: GREEN, backgroundColor: "transparent", tension: 0.4, pointRadius: 5 },
+      { label: "Referrals", data: [117, 1518, 1587, 1471], borderColor: INDIGO, backgroundColor: "transparent", tension: 0.4, pointRadius: 5 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: {
+        mode: "index", intersect: false,
+        callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}` }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0)+"K" : v },
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── QoQ Clicks Chart ───────────────────────────────────────────────────────
+new Chart(document.getElementById("qoqClicksChart"), {
+  type: "bar",
+  data: {
+    labels: ["Month 1", "Month 2", "Month 3"],
+    datasets: [
+      {
+        label: "Q4 2025 (Oct / Nov / Dec)",
+        data: [1319, 1404, 1459],
+        backgroundColor: SLATE_L,
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+      {
+        label: "Q1 2026 (Jan / Feb / Mar)",
+        data: [3139, 2958, 2633],
+        backgroundColor: BLUE,
+        borderRadius: 6,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: {
+        callbacks: {
+          title: ctx => {
+            const labels = [["Oct '25","Jan '26"],["Nov '25","Feb '26"],["Dec '25","Mar '26"]];
+            return labels[ctx[0].dataIndex][ctx[0].datasetIndex];
+          },
+          label: ctx => ` ${ctx.raw.toLocaleString()} clicks`
+        }
+      }
+    },
+    scales: {
+      y: { grid: { color: "#E2E8F0" }, border: { dash: [4,4] }, ticks: { callback: v => v.toLocaleString() } },
+      x: {
+        grid: { display: false },
+        ticks: {
+          callback: (_, i) => ["Oct vs Jan", "Nov vs Feb", "Dec vs Mar"][i]
+        }
+      }
+    }
+  }
+});
+
+// ── QoQ Impressions Chart ───────────────────────────────────────────────────
+new Chart(document.getElementById("qoqImprChart"), {
+  type: "bar",
+  data: {
+    labels: ["Month 1", "Month 2", "Month 3"],
+    datasets: [
+      {
+        label: "Q4 2025 (Oct / Nov / Dec)",
+        data: [119152, 143848, 185971],
+        backgroundColor: SLATE_L,
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+      {
+        label: "Q1 2026 (Jan / Feb / Mar)",
+        data: [324000, 503000, 483000],
+        backgroundColor: TEAL,
+        borderRadius: 6,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: {
+        callbacks: {
+          title: ctx => {
+            const labels = [["Oct '25","Jan '26"],["Nov '25","Feb '26"],["Dec '25","Mar '26"]];
+            return labels[ctx[0].dataIndex][ctx[0].datasetIndex];
+          },
+          label: ctx => ` ${ctx.raw.toLocaleString()} impressions`
+        }
+      }
+    },
+    scales: {
+      y: {
+        grid: { color: "#E2E8F0" }, border: { dash: [4,4] },
+        ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0)+"K" : v }
+      },
+      x: {
+        grid: { display: false },
+        ticks: { callback: (_, i) => ["Oct vs Jan", "Nov vs Feb", "Dec vs Mar"][i] }
+      }
+    }
+  }
+});
+
+// ── 6-Month Trend ───────────────────────────────────────────────────────────
+new Chart(document.getElementById("sixMonthChart"), {
+  type: "bar",
+  data: {
+    labels: ["Oct '25", "Nov '25", "Dec '25", "Jan '26", "Feb '26", "Mar '26"],
+    datasets: [
+      {
+        label: "Clicks",
+        data: [1319, 1404, 1459, 3139, 2958, 2633],
+        backgroundColor: [SLATE_L, SLATE_L, SLATE_L, BLUE, BLUE, BLUE],
+        borderRadius: 6,
+        borderSkipped: false,
+        yAxisID: "y",
+      },
+      {
+        label: "Impressions",
+        data: [119152, 143848, 185971, 324000, 503000, 483000],
+        type: "line",
+        borderColor: TEAL,
+        backgroundColor: "transparent",
+        tension: 0.4,
+        pointRadius: 5,
+        pointBackgroundColor: TEAL,
+        yAxisID: "y1",
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: {
+        mode: "index", intersect: false,
+        callbacks: { label: ctx => ctx.datasetIndex === 0 ? ` ${ctx.raw.toLocaleString()} clicks` : ` ${ctx.raw.toLocaleString()} impressions` }
+      },
+      annotation: {
+        annotations: {
+          box: {
+            type: "box", xMin: 2.5, xMax: 5.5,
+            backgroundColor: "rgba(37,99,235,0.05)",
+            borderColor: "rgba(37,99,235,0.2)", borderWidth: 1,
+            label: { content: "Q1 2026", display: true, color: BLUE, font: { size: 11, weight: "600" } }
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        grid: { color: "#E2E8F0" }, border: { dash: [4,4] },
+        ticks: { callback: v => v.toLocaleString() },
+        title: { display: true, text: "Clicks", color: SLATE }
+      },
+      y1: {
+        position: "right",
+        grid: { display: false },
+        ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0)+"K" : v },
+        title: { display: true, text: "Impressions", color: TEAL }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Bing Campaign Chart ────────────────────────────────────────────────────
+new Chart(document.getElementById("bingCampaignChart"), {
+  type: "bar",
+  data: {
+    labels: ["GovDash - Alpha", "GovDash - Beta", "GovDash - Competitors"],
+    datasets: [
+      {
+        label: "Clicks",
+        data: [315, 185, 100],
+        backgroundColor: [BLUE, TEAL, AMBER],
+        borderRadius: 6,
+        borderSkipped: false,
+        yAxisID: "y",
+      },
+      {
+        label: "Spend ($)",
+        data: [208.47, 258.04, 312.42],
+        backgroundColor: [BLUE+"55", TEAL+"55", AMBER+"55"],
+        borderRadius: 6,
+        borderSkipped: false,
+        yAxisID: "y1",
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: { mode: "index", intersect: false }
+    },
+    scales: {
+      y: { grid: { color: "#E2E8F0" }, border: { dash: [4,4] }, title: { display: true, text: "Clicks", color: SLATE } },
+      y1: { position: "right", grid: { display: false }, ticks: { callback: v => "$"+v }, title: { display: true, text: "Spend", color: SLATE } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Bing Network Chart ─────────────────────────────────────────────────────
+new Chart(document.getElementById("bingNetworkChart"), {
+  type: "doughnut",
+  data: {
+    labels: ["Search Network (10,968 clicks)", "Audience Network (2,938 clicks)"],
+    datasets: [{
+      data: [10968, 2938],
+      backgroundColor: [NAVY, SLATE_L],
+      borderWidth: 0,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: "65%",
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 14, usePointStyle: true } },
+      tooltip: { callbacks: { label: ctx => {
+        const ctrs = ["4.60% CTR · $0.82 CPC", "0.84% CTR · $0.46 CPC"];
+        return ` ${ctx.raw.toLocaleString()} clicks - ${ctrs[ctx.dataIndex]}`;
+      }}}
+    }
+  }
+});
+
+// ── Bing Top Keywords Chart ────────────────────────────────────────────────
+new Chart(document.getElementById("bingKwChart"), {
+  type: "bar",
+  data: {
+    labels: [
+      "software for govcon", "govcon (Alpha)", "ai for gov't contractors",
+      "govwin", "ai for govcon (Beta)", "govcon (Beta)",
+      "sam gov", "ai for govcon (Alpha)", "deltek", "GSA Ebuy"
+    ],
+    datasets: [{
+      label: "Clicks",
+      data: [117, 97, 82, 63, 60, 47, 20, 19, 11, 9],
+      backgroundColor: [BLUE, BLUE, BLUE, AMBER, TEAL, TEAL, TEAL, BLUE, AMBER, AMBER],
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw} clicks` } }
+    },
+    scales: {
+      x: { grid: { color: "#E2E8F0" }, border: { dash: [4,4] } },
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// ── Reddit Spend Chart ─────────────────────────────────────────────────────
+new Chart(document.getElementById("redditSpendChart"), {
+  type: "bar",
+  data: {
+    labels: ["r/washingtondc", "r/govfire", "r/gov't\ncontracting", "r/defense\ncontracting", "r/gov't\ncontractor", "r/govcon", "r/govtech"],
+    datasets: [{
+      label: "Spend (USD)",
+      data: [4820.78, 549.48, 287.13, 90.48, 21.22, 14.86, 2.12],
+      backgroundColor: [AMBER, SLATE_L, SLATE_L, SLATE_L, SLATE_L, SLATE_L, SLATE_L],
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` $${ctx.raw.toFixed(2)}` } }
+    },
+    scales: {
+      y: {
+        grid: { color: "#E2E8F0" }, border: { dash: [4,4] },
+        ticks: { callback: v => "$" + v.toLocaleString() }
+      },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// ── Reddit Audience Doughnut ───────────────────────────────────────────────
+new Chart(document.getElementById("redditAudienceChart"), {
+  type: "doughnut",
+  data: {
+    labels: ["r/washingtondc (87%)", "r/govfire (9.4%)", "r/gov'tcontracting (5.3%)", "r/defensecontracting (1.9%)", "Other (<1%)"],
+    datasets: [{
+      data: [87.0, 9.39, 5.25, 1.88, 0.63],
+      backgroundColor: [AMBER, SLATE_L, "#6366F1", NAVY, SLATE_L + "66"],
+      borderWidth: 0,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: "65%",
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 12, usePointStyle: true, font: { size: 11 } } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw}% of audience` } }
+    }
+  }
+});
+
+// ── Tabs ────────────────────────────────────────────────────────────────────
+function switchTab(id) {
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("tab-" + id).classList.add("active");
+  event.currentTarget.classList.add("active");
+}
+
+// ── Scroll animations ───────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
+
+// ── Navattic Tour Breakdown ────────────────────────────────────────────────
+new Chart(document.getElementById("navatticTourChart"), {
+  type: "doughnut",
+  data: {
+    labels: [
+      "GovDash Product Tour (789)",
+      "Capture Cloud (122)",
+      "Proposal Cloud (111)",
+      "Contract Cloud (23)",
+      "Other (17)"
+    ],
+    datasets: [{
+      data: [789, 122, 111, 23, 17],
+      backgroundColor: [BLUE, TEAL, GREEN, "#7C3AED", SLATE_L],
+      borderWidth: 0,
+      hoverOffset: 10,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: "62%",
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 12, usePointStyle: true, font: { size: 11 } } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw} views (${(ctx.raw/1062*100).toFixed(1)}%)` } }
+    }
+  }
+});
+
+// ── Navattic Daily Trend ───────────────────────────────────────────────────
+new Chart(document.getElementById("navatticTrendChart"), {
+  type: "bar",
+  data: {
+    labels: ["Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27"],
+    datasets: [{
+      label: "Demo Views",
+      data: [2, 30, 12, 14, 12, 8, 10, 19, 11, 6, 7, 1],
+      backgroundColor: BLUE,
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.raw} views` } }
+    },
+    scales: {
+      y: { grid: { color: "#E2E8F0" }, border: { dash: [4,4] } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// ── Navattic UTM Chart ─────────────────────────────────────────────────────
+new Chart(document.getElementById("navatticUtmChart"), {
+  type: "bar",
+  data: {
+    labels: [
+      "Discover Public Launch",
+      "Pricer Launch",
+      "Monthly Intel Brief",
+      "Product Launches",
+      "Industry Reports/Blogs",
+      "Other Named Campaigns"
+    ],
+    datasets: [
+      {
+        label: "Product Tour",
+        data: [11, 0, 2, 1, 0, 5],
+        backgroundColor: BLUE,
+        borderRadius: 4,
+        stack: "s",
+      },
+      {
+        label: "Proposal Cloud",
+        data: [0, 8, 0, 1, 0, 4],
+        backgroundColor: GREEN,
+        borderRadius: 4,
+        stack: "s",
+      },
+      {
+        label: "Capture Cloud",
+        data: [1, 0, 0, 1, 1, 0],
+        backgroundColor: TEAL,
+        borderRadius: 4,
+        stack: "s",
+      },
+      {
+        label: "Other",
+        data: [0, 0, 2, 1, 0, 0],
+        backgroundColor: AMBER,
+        borderRadius: 4,
+        stack: "s",
+      }
+    ]
+  },
+  options: {
+    indexAxis: "y",
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 14, usePointStyle: true } },
+      tooltip: { mode: "index", intersect: false }
+    },
+    scales: {
+      x: { stacked: true, grid: { color: "#E2E8F0" }, border: { dash: [4,4] } },
+      y: { stacked: true, grid: { display: false } }
+    }
+  }
+});
+
+// ── Active nav on scroll ────────────────────────────────────────────────────
+const sections = document.querySelectorAll("section[id]");
+const navLinks  = document.querySelectorAll("nav a");
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+  });
+}, { passive: true });
+
+// ── SEMrush Organic Growth Chart ────────────────────────────────────────────
+new Chart(document.getElementById("semrushOrgChart"), {
+  type: "bar",
+  data: {
+    labels: ["Oct '25", "Nov '25", "Dec '25", "Jan '26", "Feb '26", "Mar '26"],
+    datasets: [
+      {
+        label: "Est. Organic Traffic",
+        data: [52375, 45089, 54948, 58189, 62508, 92924],
+        backgroundColor: [SLATE_L, SLATE_L, SLATE_L, BLUE+"CC", BLUE+"CC", BLUE],
+        borderRadius: 6,
+        borderSkipped: false,
+        yAxisID: "y",
+      },
+      {
+        label: "Ranked Keywords",
+        data: [285, 461, 938, 1454, 2070, 2374],
+        type: "line",
+        borderColor: GREEN,
+        backgroundColor: "transparent",
+        tension: 0.4,
+        pointRadius: 5,
+        pointBackgroundColor: GREEN,
+        yAxisID: "y1",
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom", labels: { padding: 16, usePointStyle: true } },
+      tooltip: {
+        mode: "index", intersect: false,
+        callbacks: {
+          label: ctx => ctx.datasetIndex === 0
+            ? ` Est. Traffic: ${ctx.raw.toLocaleString()}`
+            : ` Keywords: ${ctx.raw.toLocaleString()}`
+        }
+      }
+    },
+    scales: {
+      y: {
+        grid: { color: "#E2E8F0" },
+        border: { dash: [4,4] },
+        ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0)+"K" : v },
+        title: { display: true, text: "Est. Organic Traffic", font: { size: 10 }, color: SLATE_L }
+      },
+      y1: {
+        position: "right",
+        grid: { drawOnChartArea: false },
+        ticks: { callback: v => v.toLocaleString() },
+        title: { display: true, text: "Ranked Keywords", font: { size: 10 }, color: GREEN }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Business Drivers Chart ────────────────────────────────────────────────
+new Chart(document.getElementById("bizDriversChart"), {
+  type: "bar",
+  data: {
+    labels: [
+      "AI Drafting\nAcceleration",
+      "GovCon Content\nLibrary",
+      "Govt. Grade\nSecurity",
+      "Automated\nCompliance",
+      "End-to-End\nWorkspace",
+      "Isolated Secure\nAI Deploy",
+      "SharePoint\nIntegration",
+      "Audit Trails &\nGovernance",
+      "Capture Intel\n& Scoring"
+    ],
+    datasets: [
+      {
+        label: "GovDash",
+        data: [24, 21, 10, 8, 8, 5, 4, 3, 2],
+        backgroundColor: NAVY,
+        borderRadius: 4
+      },
+      {
+        label: "Unanet",
+        data: [5, 4, 0, 14, 6, 0, 0, 0, 0],
+        backgroundColor: BLUE,
+        borderRadius: 4
+      },
+      {
+        label: "Proc. Sciences",
+        data: [11, 2, 0, 14, 3, 0, 0, 0, 7],
+        backgroundColor: TEAL,
+        borderRadius: 4
+      },
+      {
+        label: "Deltek",
+        data: [5, 5, 0, 6, 9, 0, 0, 6, 7],
+        backgroundColor: AMBER,
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { mode: "index", intersect: false }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: "rgba(0,0,0,0.05)" }, ticks: { stepSize: 5 } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// ── AI Platform Perception Chart ─────────────────────────────────────────
+new Chart(document.getElementById("aiPlatformChart"), {
+  type: "bar",
+  data: {
+    labels: ["GovDash", "Unanet", "Proc. Sci.", "Deltek", "Govsignals"],
+    datasets: [
+      {
+        label: "Gemini",
+        data: [94, 78, 65, 58, 70],
+        backgroundColor: NAVY,
+        borderRadius: 3
+      },
+      {
+        label: "Google AI",
+        data: [94, 76, 62, 55, 68],
+        backgroundColor: BLUE,
+        borderRadius: 3
+      },
+      {
+        label: "ChatGPT",
+        data: [88, 70, 58, 48, 65],
+        backgroundColor: TEAL,
+        borderRadius: 3
+      },
+      {
+        label: "Perplexity",
+        data: [82, 65, 55, 42, 62],
+        backgroundColor: "#94A3B8",
+        borderRadius: 3
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: "bottom", labels: { font: { size: 10 }, boxWidth: 10 } },
+      tooltip: { mode: "index", intersect: false }
+    },
+    scales: {
+      y: {
+        beginAtZero: true, max: 100,
+        ticks: { callback: v => v + "%" },
+        grid: { color: "rgba(0,0,0,0.05)" }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// ── Sentiment Heatmap ────────────────────────────────────────────────────
+(function() {
+  const heatRows = [
+    ["Security & Compliance",       100, 100, 50,  33 ],
+    ["Collab & Lifecycle Mgmt",     99,  86,  75,  54 ],
+    ["GovCon & Federal Focus",      98,  86,  88,  93 ],
+    ["Analytics & Insights",        98,  100, 100, 73 ],
+    ["RFP Ingestion & Compliance",  98,  93,  80,  50 ],
+    ["Proposal Authoring AI",       97,  90,  87,  67 ],
+    ["Integrations & Deployment",   95,  50,  null, 13 ]
+  ];
+  function heatColor(v) {
+    if (v === null) return { bg: "#E2E8F0", fg: "#94A3B8" };
+    if (v >= 93) return { bg: "#0F766E", fg: "#fff" };
+    if (v >= 61) return { bg: "#10B981", fg: "#fff" };
+    if (v >= 40) return { bg: "#FCD34D", fg: "#78350F" };
+    return { bg: "#F97316", fg: "#fff" };
+  }
+  const tbody = document.getElementById("heatmapBody");
+  heatRows.forEach(row => {
+    const tr = document.createElement("tr");
+    const label = row[0];
+    const vals = row.slice(1);
+    let html = `<td style="padding:5px 8px;color:var(--dark);font-weight:500;border-bottom:1px solid var(--light);">${label}</td>`;
+    vals.forEach(v => {
+      const c = heatColor(v);
+      html += `<td style="padding:5px 6px;text-align:center;border-bottom:1px solid var(--light);">
+        <span style="display:inline-block;width:36px;line-height:26px;border-radius:5px;background:${c.bg};color:${c.fg};font-weight:700;font-size:0.7rem;">${v !== null ? v : "—"}</span>
+      </td>`;
+    });
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>
